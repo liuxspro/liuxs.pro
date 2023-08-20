@@ -51,6 +51,10 @@ li:has(input[type="checkbox"]) {
   }
 }
 
+.typography {
+  @apply w-full;
+}
+
 /* 正文字体 */
 p {
   @apply text-color text-base/8 my-4 font-medium;
