@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block title %}
+  {{ page.title }}
+{% endblock %} {% block content %}
+  <article>
+    <div class="artcontainer">
+      <div class="mb-4 border-b">
+        <div id="title">
+          <div id="title" class="py-2 my-2 text-2xl font-semibold font-din sm:my-4 text-gray-900 dark:text-gray-200">{{ page.title }}</div>
+        </div>
+        <div id="info" class="flex space-x-2 mb-4 text-xs text-gray-600 font-sans dark:text-gray-300">
+          <p></p>
+          <div class="flex items-center space-x-1">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+              </svg>
+            </span>
+            <span>{{ page.date|date(format = '%Y/%m/%d') }}</span>
+          </div>
+          <div class="flex items-center space-x-1">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </span>
+            <span>约 {{ page.word_count }} 字 &nbsp; {{ page.reading_time }} 分钟读完</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-start">
+        <div id="content" class="typography">{{ page.content|safe }}</div>
+      </div>
+    </div>
+  </article>
+  <aside id="toc" class="hidden lg:block lg:fixed lg:top-36 lg:right-20 text-gray-700">
+    <div>
+      {% if page.toc %}
+        <div class="py-2 dark:text-gray-400">目录</div>
+        <ul class="border-l-4 pl-2 text-sm dark:border-gray-500 dark:text-gray-400">
+          {% for h1 in page.toc %}
+            <li>
+              <a href="{{ h1.permalink|safe }}" class="menu-a" data-active="false">{{ h1.title }}</a>
+              {% if h1.children %}
+                <ul>
+                  {% for h2 in h1.children %}
+                    <li class="pl-3">
+                      <a href="{{ h2.permalink|safe }}" class="hover:underline hover:font-semibold hover:text-blue-500">{{ h2.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </aside>
+{% endblock %}
