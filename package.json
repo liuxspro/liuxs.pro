@@ -1,0 +1,23 @@
+{
+  "name": "liuxs.pro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "zola serve",
+    "dev": "tailwindcss -i ./src/css/main.css -o ./static/css/main.css --watch",
+    "buildjs": "tsup --minify",
+    "buildcss": "tailwindcss -i ./src/css/main.css -o ./static/css/main.css --minify",
+    "build": "pnpm buildjs && pnpm buildcss"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
+    "daisyui": "^3.3.1",
+    "tailwindcss": "^3.3.3",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6"
+  }
+}

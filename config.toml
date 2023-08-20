@@ -1,0 +1,21 @@
+# The URL the site will be built for
+base_url = "https://light-snow.vercel.app"
+title = "Liuxs' Blog"
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = false
+default_language = "zh-CN"
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+minify_html = false
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+highlight_theme = "solarized-dark"
+
+[extra]
+# Put all your custom variables here
+menu = [
+  { link = "/blog", name = "Posts" },
+  { link = "/about", name = "About" }
+]
