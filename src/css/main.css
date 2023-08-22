@@ -22,8 +22,12 @@
 
 @layer components {
   /* 字体颜色 */
-  .text-color {
-    @apply text-gray-800 dark:text-gray-400;
+  /* 正文字体 */
+  .primary-text-color {
+    @apply text-gray-800 dark:text-gray-300;
+  }
+  .info-text-color {
+    @apply text-gray-700 dark:text-gray-400;
   }
 }
 
@@ -57,7 +61,7 @@ li:has(input[type="checkbox"]) {
 
 /* 正文字体 */
 p {
-  @apply text-color text-base/8 my-4 font-medium;
+  @apply primary-text-color text-base/8 my-4 font-medium;
 }
 
 h1 {
@@ -66,7 +70,7 @@ h1 {
 }
 
 h2 {
-  @apply my-4 text-lg leading-7;
+  @apply my-4 text-lg leading-7 primary-text-color;
   @apply border-l-8 border-orange-700 px-2;
   @apply dark:border-orange-400;
 }
@@ -111,12 +115,12 @@ table {
 
 /* 无序列表 */
 #content ul {
-  @apply list-disc list-inside text-color;
+  @apply list-disc list-inside primary-text-color;
 }
 
 /* 有序列表 */
 #content ol {
-  @apply list-decimal list-inside text-color;
+  @apply list-decimal list-inside primary-text-color;
 }
 
 /* 脚注 */
