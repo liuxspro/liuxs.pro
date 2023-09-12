@@ -40,12 +40,12 @@
         <ul class="border-l-4 pl-2 text-sm dark:border-gray-500 dark:text-gray-400">
           {% for h1 in page.toc %}
             <li>
-              <a href="{{ h1.permalink|safe }}" class="menu-a" data-active="false">{{ h1.title }}</a>
+              <a class="menu-a" data-active="false" id="{{ h1.id }}">{{ h1.title }}</a>
               {% if h1.children %}
                 <ul>
                   {% for h2 in h1.children %}
                     <li class="pl-3">
-                      <a href="{{ h2.permalink|safe }}" class="hover:underline hover:font-semibold hover:text-blue-500">{{ h2.title }}</a>
+                      <a data-active="false">{{ h2.title }}</a>
                     </li>
                   {% endfor %}
                 </ul>

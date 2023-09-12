@@ -32,8 +32,23 @@ function toogle_theme() {
   }
 }
 
+function get_toc() {
+  return document.querySelectorAll("#toc li a.menu-a");
+}
+
+function add_scroll_to_toc() {
+  const toclist = get_toc();
+  toclist.forEach((element) => {
+    element.onclick = function () {
+      const h2 = document.querySelectorAll("h2");
+      const target = [...h2].filter((d) => d.id == this.id)[0];
+      target.scrollIntoView({ behavior: "smooth" });
+    };
+  });
+}
+
 function getActiveTocElement() {
-  const toc = document.querySelectorAll("h1");
+  const toc = document.querySelectorAll("h2");
   const current = [...toc].filter((item) => item.getBoundingClientRect().y < 0);
   // console.log([...toc].map((item) => item.getBoundingClientRect().y));
   // 取最后一个y小于0的元素,如果都不小于0,就返回第一个
@@ -47,12 +62,12 @@ function markToc() {
   const activetoc = getActiveTocElement();
   if (activetoc) {
     const id = activetoc.id;
-    toclist = document.querySelectorAll("#toc li a");
+    const toclist = get_toc();
     // 取消所有active
     toclist.forEach((element) => {
       element.dataset.active = false;
     });
-    toclist_ids = [...toclist].map((item) => item.href.split("/#").reverse()[0]);
+    toclist_ids = [...toclist].map((item) => item.id);
     index = toclist_ids.indexOf(id);
     current = toclist[index];
     current.dataset.active = true;
@@ -80,6 +95,7 @@ window.onload = function () {
   const btn_toogle_theme = document.querySelector("#btn-toggle");
   const main_dom = document;
   btn_toogle_theme.onclick = toogle_theme;
+  add_scroll_to_toc();
 
   main_dom.addEventListener("scroll", () => {
     markToc();
