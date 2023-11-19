@@ -17,5 +17,6 @@ highlight_theme = "solarized-dark"
 # Put all your custom variables here
 menu = [
   { link = "/blog", name = "Posts" },
+  { link = "/notes", name = "Notes" },
   { link = "/about", name = "About" }
 ]
