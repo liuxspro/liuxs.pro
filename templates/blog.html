@@ -1,70 +1,41 @@
 {% extends 'base.html' %} {% block content %}
-<h1 class="text-lg my-4 font-ubuntu">{{ section.title }}</h1>
-<hr />
-<div>
-  {% for year, pages in section.pages|group_by(attribute = 'year') %}
-  <div class="posts-group flex-row mb-6 sm:flex">
-    <div class="post-year text-lg p-2 pt-4 opacity-80 font-din font-semibold sm:mr-6 sm:text-2xl title-text-color">
-      {{ year }}
-    </div>
-    <div class="posts grow">
-      {% for page in pages %}
-      <div class="p-2 border-b border-dashed border-gray-300">
-        <a href="{{ page.permalink }}" class="flex justify-between items-center py-2">
-          <span
-            class="font-din text-gray-700 text-sm hover:text-gray-900 hover:font-semibold sm:text-base dark:text-cyan-300"
-            >{{ page.title }}</span
-          >
-          <span class="shrink-0 text-sm info-text-color font-light font-din"
-            >{{ page.date|date(format = '%Y / %m / %d') }}</span
-          >
-          <p>1</p>
-        </a>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-  {% endfor %}
-  <div class="posts">
-    {% if paginator is defined %} {% set pages = paginator.pages %} {% set is_first_page = paginator.current_index == 1
-    %} {% elif section is defined %} {% set pages = section.pages %} {% endif %} {% for year, pages in
-    pages|group_by(attribute = 'year') %}
-    <div class="posts-group flex-row mb-6 sm:flex">
-      <div class="post-year text-lg p-2 pt-4 opacity-60 font-din font-semibold sm:mr-6 sm:text-2xl title-text-color">
-        {{ year }}
-      </div>
-      <div class="posts grow">
-        {% for page in pages %}
-        <div class="p-2 border-b border-dashed border-gray-300">
-          <a href="{{ page.permalink }}" class="flex justify-between items-center py-2">
-            <span
-              class="font-din truncate text-gray-700 text-sm hover:text-gray-900 hover:font-semibold sm:text-base dark:text-cyan-300"
-            >
-              {{ page.title }}
-            </span>
-            <span class="shrink-0 text-sm info-text-color font-light font-din">
-              {{ page.date|date(format = '%Y / %m / %d') }}
-            </span>
-          </a>
+  <h1 class="text-lg my-4 font-ubuntu">{{ section.title }}</h1>
+  <hr />
+  <div>
+    <div class="posts">
+      {% if paginator is defined %}
+        {% set pages = paginator.pages %} {% set is_first_page = paginator.current_index == 1 %}
+      {% elif section is defined %}
+        {% set pages = section.pages %}
+      {% endif %} {% for year, pages in pages|group_by(attribute = 'year') %}
+        <div class="posts-group flex-row mb-6 sm:flex">
+          <div class="post-year text-lg p-2 pt-4 opacity-60 font-din font-semibold sm:mr-6 sm:text-2xl title-text-color">{{ year }}</div>
+          <div class="posts grow">
+            {% for page in pages %}
+              <div class="p-2 border-b border-dashed border-gray-300">
+                <a href="{{ page.path }}" class="flex justify-between items-center py-2">
+                  <span class="font-din truncate text-gray-700 text-sm hover:text-gray-900 hover:font-semibold sm:text-base dark:text-cyan-300">{{ page.title }}</span>
+                  <span class="shrink-0 text-sm info-text-color font-light font-din">{{ page.date|date(format = '%Y / %m / %d') }}</span>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
         </div>
-        {% endfor %}
-      </div>
+      {% endfor %} {% if paginator is defined %}
+        <div>
+          <nav class="flex justify-between items-center">
+            {% if paginator.previous %}
+              <a class="pagination-btn" href="{{ paginator.previous }}">« Previous</a>
+            {% else %}
+              <!-- Hidden Previous-Button -->
+            {% endif %} {% if paginator.next %}
+              <a class="ml-auto pagination-btn" href="{{ paginator.next }}">Next »</a>
+            {% else %}
+              <!-- Hidden Next-Button -->
+            {% endif %}
+          </nav>
+        </div>
+      {% endif %}
     </div>
-    {% endfor %} {% if paginator is defined %}
-    <div>
-      <nav class="flex justify-between items-center">
-        {% if paginator.previous %}
-        <a class="pagination-btn" href="{{ paginator.previous }}">« Previous</a>
-        {% else %}
-        <!-- Hidden Previous-Button -->
-        {% endif %} {% if paginator.next %}
-        <a class="ml-auto pagination-btn" href="{{ paginator.next }}">Next »</a>
-        {% else %}
-        <!-- Hidden Next-Button -->
-        {% endif %}
-      </nav>
-    </div>
-    {% endif %}
   </div>
-</div>
 {% endblock %}
