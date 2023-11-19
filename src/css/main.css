@@ -97,6 +97,11 @@ blockquote p code {
   @apply px-2 py-px;
 }
 
+/* code `代码框` */
+pre {
+  @apply my-4;
+}
+
 /* code `行内代码` */
 p code {
   @apply px-1.5 py-1 rounded-md bg-gray-900/10 mx-2 text-orange-700 text-sm;
