@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from "astro:content";
+interface Props {
+  Posts: CollectionEntry<"blog">[];
+}
+// 渲染文章目录列表
+const { Posts } = Astro.props;
+---
+
+<div>
+  {
+    Posts.map((p) => (
+      <div class="p-2 border-b border-dashed border-gray-300">
+        <a href={`/blog/${p.slug}/`} class="flex justify-between items-center py-2">
+          <span>{p.data.title}</span>
+          <span class="text-sm font-mono">{new Date(p.data.date).toLocaleDateString()}</span>
+        </a>
+      </div>
+    ))
+  }
+</div>
