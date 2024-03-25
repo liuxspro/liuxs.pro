@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/BaseLayout.astro";
+import PostsMenu from "../components/PostsMenu.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+const allPosts = await getCollection("blog");
+const title = "Blog";
+allPosts.sort((a, b) => {
+  const a_date = new Date(a.data.date).valueOf();
+  const b_date = new Date(b.data.date).valueOf();
+  return b_date - a_date;
+});
+
+type GroupedPosts = {
+  [year: number | string]: CollectionEntry<"blog">[];
+};
+
+let grouped_by_year: GroupedPosts = {};
+allPosts.forEach((item) => {
+  const item_date = new Date(item.data.date);
+  const item_year = item_date.getFullYear();
+  if (!grouped_by_year[item_year]) {
+    grouped_by_year[item_year] = [];
+  }
+  grouped_by_year[item_year].push(item);
+});
+---
+
+<Layout page_title={title}>
+  <h1 class="text-lg my-4 font-ubuntu">List of blog posts</h1>
+  <PostsMenu Posts={grouped_by_year} />
+</Layout>

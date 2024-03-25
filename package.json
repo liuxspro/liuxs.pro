@@ -1,22 +1,25 @@
 {
-  "name": "liuxs.pro",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "my-astro-blog",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "serve": "zola serve",
-    "dev": "tailwindcss -i ./src/css/main.css -o ./static/css/main.css --watch",
-    "buildjs": "tsup --minify",
-    "buildcss": "tailwindcss -i ./src/css/main.css -o ./static/css/main.css --minify",
-    "build": "pnpm buildjs && pnpm buildcss"
+    "dev": "astro dev --host",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "@astrojs/check": "^0.5.9",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.5.5",
+    "clipboard": "^2.0.11",
+    "rehype-katex": "^7.0.0",
+    "remark-math": "^6.0.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.4.2"
+  },
   "devDependencies": {
-    "daisyui": "^4.4.2",
-    "tailwindcss": "^3.3.5",
-    "tsup": "^7.2.0",
-    "typescript": "^5.2.2"
+    "daisyui": "^4.7.3"
   }
 }

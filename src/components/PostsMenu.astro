@@ -1,0 +1,22 @@
+---
+import PostList from "./PostList.astro";
+import type { CollectionEntry } from "astro:content";
+interface Props {
+  Posts: { [year: number | string]: CollectionEntry<"blog">[] };
+}
+
+const { Posts } = Astro.props;
+---
+
+<div>
+  {
+    Object.keys(Posts).map((year) => (
+      <div class="flex-row mb-6 sm:flex">
+        <div class="year text-lg p-2 opacity-60 font-din font-semibold sm:mr-6 sm:text-2xl title-text-color">
+          <div>{year}</div>
+        </div>
+        <div class="posts grow">{<PostList Posts={Posts[year]} />}</div>
+      </div>
+    ))
+  }
+</div>
