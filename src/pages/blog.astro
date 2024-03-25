@@ -15,7 +15,7 @@ type GroupedPosts = {
   [year: number | string]: CollectionEntry<"blog">[];
 };
 
-let grouped_by_year: GroupedPosts = {};
+const grouped_by_year: GroupedPosts = {};
 allPosts.forEach((item) => {
   const item_date = new Date(item.data.date);
   const item_year = item_date.getFullYear();
@@ -27,6 +27,6 @@ allPosts.forEach((item) => {
 ---
 
 <Layout page_title={title}>
-  <h1 class="text-lg my-4 font-ubuntu">List of blog posts</h1>
+  <div class="text-lg my-4 font-ubuntu border-b pb-2">List of blog posts</div>
   <PostsMenu Posts={grouped_by_year} />
 </Layout>
