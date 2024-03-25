@@ -16,6 +16,9 @@
   .info-text-color {
     @apply text-gray-700 dark:text-gray-400;
   }
+  .title-text-color {
+    @apply text-gray-900 dark:text-gray-400;
+  }
 }
 /* 正文字体 */
 p {
