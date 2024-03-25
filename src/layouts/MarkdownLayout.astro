@@ -1,0 +1,40 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import "../style/base.css";
+import "../style/markdown.css";
+
+const { title } = Astro.props;
+---
+
+<BaseLayout page_title={title}>
+  <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet" slot="in_head" />
+  <article>
+    <slot />
+  </article>
+</BaseLayout>
+
+<script>
+  import ClipboardJS from "clipboard";
+  const pre_dom = document.querySelectorAll("pre.astro-code");
+
+  pre_dom.forEach((item, index) => {
+    const code = item.querySelector("code");
+    if (code) {
+      code.id = `copy_target_${index}`;
+    }
+    const cp = document.createElement("button");
+    // cp.innerHTML = "Copied";
+    cp.title = "Copy Code";
+    cp.className = "code_copy";
+    cp.setAttribute("data-clipboard-target", `#copy_target_${index}`);
+    item.appendChild(cp);
+  });
+  const clipboard = new ClipboardJS(".code_copy");
+  clipboard.on("success", function (e) {
+    e.trigger.classList.add("copied");
+    setTimeout(() => {
+      e.trigger.classList.remove("copied");
+    }, 1000);
+    e.clearSelection();
+  });
+</script>

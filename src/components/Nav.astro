@@ -1,0 +1,20 @@
+---
+import DarkThemeSwitch from "./DarkThemeSwitch.astro";
+import "../style/base.css";
+---
+
+<nav
+  class="flex items-center px-4 lg:px-8 py-4 bg-slate-50 justify-between shadow-sm shadow-slate-300 dark:bg-gray-600 dark:shadow-slate-700"
+>
+  <div class="font-semibold text-cyan-900 mx-4 font-din dark:text-cyan-300">
+    <a href="/">Liuxs' Blog</a>
+  </div>
+  <div id="menu" class="flex lg:pr-8 font-din items-center">
+    <ul class="flex items-center space-x-4 mx-4">
+      <li>
+        <a href="/blog" class="text-cyan-900 dark:text-cyan-300">Posts</a>
+      </li>
+    </ul>
+    <DarkThemeSwitch />
+  </div>
+</nav>

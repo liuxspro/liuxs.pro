@@ -1,2 +1,3 @@
 # liuxs.pro
-My Website Build With Zola
+
+My Website Build With Astro

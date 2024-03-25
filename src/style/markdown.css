@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --icon-copied: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4'/%3E%3C/svg%3E");
+  --icon-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E");
+}
+
+/* 字体颜色 */
+@layer components {
+  /* 正文字体颜色 */
+  .primary-text-color {
+    @apply text-gray-800 dark:text-gray-300;
+  }
+  .info-text-color {
+    @apply text-gray-700 dark:text-gray-400;
+  }
+}
+/* 正文字体 */
+p {
+  @apply text-base/8 my-4 font-medium primary-text-color;
+}
+h1 {
+  @apply text-2xl font-semibold; /* 字体设置 */
+  @apply my-6;
+}
+h2 {
+  @apply my-4 text-lg leading-7;
+  @apply border-l-8 border-orange-700 px-2;
+  @apply dark:border-orange-400;
+}
+
+/* 代码框 */
+pre {
+  @apply p-4 rounded-md overflow-auto text-sm;
+}
+
+pre.astro-code {
+  @apply my-2 relative border dark:border-slate-500;
+}
+
+/* 复制按钮 */
+button.code_copy {
+  @apply absolute top-1 right-1 p-4 w-6 h-6;
+  background-image: var(--icon-copy);
+  background-size: 1.5em;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+pre.astro-code:hover > button.code_copy {
+  transition: opacity 0.25s;
+  opacity: 1;
+}
+button.copied {
+  background-image: var(--icon-copied);
+}
+button.copied::before {
+  content: "Copied";
+  height: 20px;
+  position: absolute;
+  left: -4em;
+  top: 0.5em;
+}
+
+/* 引用 */
+blockquote {
+  @apply dark:border-gray-500 text-base border-l-4 px-3;
+}
+
+blockquote p {
+  @apply text-gray-500 text-sm font-medium mb-4;
+  @apply dark:text-gray-400;
+}
+
+/* blockquote 里面的 `行内代码` */
+blockquote p code {
+  @apply px-2 py-px;
+}
+
+/* code `行内代码` */
+p code {
+  white-space: nowrap;
+  @apply px-1.5 py-1 rounded-md bg-gray-900/10 mx-2 text-orange-700 text-sm;
+  @apply dark:bg-gray-100/20 dark:text-orange-300;
+}
+
+/* 脚注 */
+
+sup {
+  top: -0.5em;
+  padding-left: 0.4em;
+}
+
+sup a {
+  @apply after:content-[']'] before:content-['['];
+  @apply mr-1 decoration-sky-600 text-sky-600;
+  @apply dark:text-sky-300 dark:decoration-sky-300;
+}
+
+section.footnotes {
+  @apply mt-6 border-t;
+}
+
+html.dark pre.astro-code-themes {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  /* 可选，用于定义字体样式 */
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
