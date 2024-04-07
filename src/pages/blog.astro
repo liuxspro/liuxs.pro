@@ -1,6 +1,6 @@
 ---
-import Layout from "../layouts/BaseLayout.astro";
-import PostsMenu from "../components/PostsMenu.astro";
+import Layout from "@layouts/BaseLayout.astro";
+import PostsMenu from "@components/PostsMenu.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 const allPosts = await getCollection("blog");
