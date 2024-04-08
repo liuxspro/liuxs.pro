@@ -1,13 +1,13 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
 <BaseLayout page_title="Liuxs' Blog">
   <div class="flex items-center justify-center h-full">
     <div id="profile" class="flex flex-col items-center">
       <div class="avatar">
-        <div class="w-28 mask mask-squircle">
-          <img src="logo.webp" />
+        <div class="w-28 mask mask-squircle" transition:animate="slide">
+          <img src="/logo.webp" />
         </div>
       </div>
       <div class="text-lg mt-2">Liu XS</div>

@@ -2,9 +2,9 @@
 interface Props {
   page_title: string;
 }
-import Navigation from "../components/Nav.astro";
-import Footer from "../components/Footer.astro";
-
+import Navigation from "@components/Nav.astro";
+import Footer from "@components/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
 const { page_title } = Astro.props;
 ---
 
@@ -14,17 +14,19 @@ const { page_title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon-64.png" />
     <meta name="generator" content={Astro.generator} />
     <slot name="in_head" />
+    <ViewTransitions />
     <title>{page_title}</title>
-  </head><body>
+  </head>
+  <body>
     <div id="container" class="flex flex-col bg-slate-50 dark:bg-gray-600 min-h-screen">
       <header>
         <Navigation />
       </header>
       <main class="flex grow shrink-0 justify-center space-x-4">
-        <div class="w-11/12 m-4 p-8 sm:w-10/12 lg:w-7/12 dark:text-cyan-300">
+        <div class="w-full m-2 p-4 sm:w-10/12 lg:p-8 lg:w-7/12 dark:text-cyan-300">
           <slot />
         </div>
       </main>

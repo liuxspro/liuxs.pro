@@ -10,13 +10,13 @@ const { Posts } = Astro.props;
 
 <div>
   {
-    Object.keys(Posts).map((year) => (
-      <div class="flex-row mb-6 sm:flex">
-        <div class="year text-lg p-2 opacity-60 font-din font-semibold sm:mr-6 sm:text-2xl title-text-color">
-          <div>{year}</div>
+    Object.keys(Posts)
+      .reverse()
+      .map((year) => (
+        <div class="flex-col mb-6 sm:flex">
+          <div class="text-xl title-text-color p-2 font-din font-semibold sm:mr-6 sm:text-2xl">{year}</div>
+          <div class="posts grow">{<PostList Posts={Posts[year]} />}</div>
         </div>
-        <div class="posts grow">{<PostList Posts={Posts[year]} />}</div>
-      </div>
-    ))
+      ))
   }
 </div>

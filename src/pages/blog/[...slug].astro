@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../layouts/MarkdownLayout.astro";
+import MarkdownLayout from "@layouts/MarkdownLayout.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -14,7 +14,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<Layout title={entry.data.title}>
+<MarkdownLayout title={entry.data.title}>
   <div class="mb-4 border-b">
     <div id="title">
       <div id="title" class="py-2 my-2 text-2xl font-semibold font-din sm:my-4 text-gray-900 dark:text-gray-200">
@@ -41,7 +41,7 @@ const { Content } = await entry.render();
         </span>
         <span>{new Date(entry.data.date).toLocaleDateString()}</span>
       </div>
-      <div class="flex items-center space-x-1">
+      <div class="flex items-center space-x-1 font-mono">
         {entry.data.tags.map((t) => <div class="border rounded-md p-1 mx-1 before:content-['#']">{t}</div>)}
       </div>
     </div>
@@ -49,4 +49,4 @@ const { Content } = await entry.render();
   <div>
     <Content />
   </div>
-</Layout>
+</MarkdownLayout>

@@ -46,7 +46,7 @@ ImmortalWrt 也提供了自定义预安装软件包和首次启动配置脚本.
 
 如果无法访问网络，尝试在“网络 - 防火墙 - 自定义规则”中新增一行 iptables 规则并重启防火墙
 
-```text
+```plaintext
 iptables -t nat -I POSTROUTING -j MASQUERADE
 ```
 
