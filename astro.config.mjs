@@ -21,4 +21,7 @@ export default defineConfig({
     // 示例：将脚注文本翻译成另一种语言，这里是默认的英文内容
     remarkRehype: { footnoteLabel: "参考", footnoteBackLabel: "Back to reference 1" },
   },
+  devToolbar: {
+    enabled: false,
+  },
 });
