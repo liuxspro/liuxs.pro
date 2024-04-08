@@ -41,7 +41,7 @@ const { Content } = await entry.render();
         </span>
         <span>{new Date(entry.data.date).toLocaleDateString()}</span>
       </div>
-      <div class="flex items-center space-x-1">
+      <div class="flex items-center space-x-1 font-mono">
         {entry.data.tags.map((t) => <div class="border rounded-md p-1 mx-1 before:content-['#']">{t}</div>)}
       </div>
     </div>
