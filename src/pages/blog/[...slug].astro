@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import MarkdownLayout from "@layouts/MarkdownLayout.astro";
+import dayjs from "dayjs";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -39,7 +40,7 @@ const { Content } = await entry.render();
             ></path>
           </svg>
         </span>
-        <span>{new Date(entry.data.date).toLocaleDateString()}</span>
+        <span>{dayjs(entry.data.date).format("YYYY-MM-DD HH:mm:ss")}</span>
       </div>
       <div class="flex items-center space-x-1 font-mono">
         {entry.data.tags.map((t) => <div class="border rounded-md p-1 mx-1 before:content-['#']">{t}</div>)}
