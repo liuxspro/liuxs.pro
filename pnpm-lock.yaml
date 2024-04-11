@@ -20,6 +20,9 @@ dependencies:
   clipboard:
     specifier: ^2.0.11
     version: 2.0.11
+  dayjs:
+    specifier: ^1.11.10
+    version: 1.11.10
   rehype-katex:
     specifier: ^7.0.0
     version: 7.0.0
@@ -1518,6 +1521,10 @@ packages:
     transitivePeerDependencies:
       - postcss
     dev: true
+
+  /dayjs@1.11.10:
+    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
+    dev: false
 
   /debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
