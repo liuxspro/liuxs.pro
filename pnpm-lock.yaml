@@ -14,6 +14,9 @@ dependencies:
   astro:
     specifier: ^4.5.5
     version: 4.5.5(typescript@5.4.2)
+  astro-loading-indicator:
+    specifier: ^0.3.0
+    version: 0.3.0(astro@4.5.5)(swup@4.6.1)
   clipboard:
     specifier: ^2.0.11
     version: 2.0.11
@@ -802,6 +805,21 @@ packages:
     resolution: {integrity: sha512-OlFvx+nyr5C8zpcMBnSGir0YPD6K11uYhouqhNmm1qLiis4GA7SsGtu07r9gKS9omks8RtQqHrJL4S+lqWK01A==}
     dev: false
 
+  /@swup/plugin@4.0.0:
+    resolution: {integrity: sha512-3Kq31BJxnzoPg643YxGoWQggoU6VPKZpdE5CqqmP7wwkpCYTzkRmrfcQ29mGhsSS7xfS7D33iZoBiwY+wPoo2A==}
+    dependencies:
+      swup: 4.6.1
+    dev: false
+
+  /@swup/progress-plugin@3.2.0(swup@4.6.1):
+    resolution: {integrity: sha512-Ur+D4+aee9swR6pn7JbEyGMwVP1BTcN5ygjlno7IaSQ/vMZbuJ73po1RkKlIi86p+/PZ+1kynkH4K4eMZuHKKg==}
+    peerDependencies:
+      swup: ^4.0.0
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.6.1
+    dev: false
+
   /@types/babel__core@7.20.5:
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
     dependencies:
@@ -1036,6 +1054,17 @@ packages:
 
   /array-iterate@2.0.1:
     resolution: {integrity: sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==}
+    dev: false
+
+  /astro-loading-indicator@0.3.0(astro@4.5.5)(swup@4.6.1):
+    resolution: {integrity: sha512-s9oiA4bJjnEUX/7LyxOSVWdBSU9lvWHyZ+rArSsKgN1Oa5HbtT9SM+WgaKHwjo5BFyMUDsQ251Hmd/vaXt0m0A==}
+    peerDependencies:
+      astro: ^4.0.0
+    dependencies:
+      '@swup/progress-plugin': 3.2.0(swup@4.6.1)
+      astro: 4.5.5(typescript@5.4.2)
+    transitivePeerDependencies:
+      - swup
     dev: false
 
   /astro@4.5.5(typescript@5.4.2):
@@ -1523,6 +1552,12 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /delegate-it@6.1.0:
+    resolution: {integrity: sha512-sPgBvzO3GVViT1qKiuMLKnZs2HokFwCg304kv2bbG08Tm3qi9u5y5jEC7u2dR0js22i+17JTfqK0XpWop9c67w==}
+    dependencies:
+      typed-query-selector: 2.11.2
+    dev: false
 
   /delegate@3.2.0:
     resolution: {integrity: sha512-IofjkYBZaZivn0V8nnsMJGBr4jVLxHDheKSW88PyxS5QC4Vo9ZbZVvhzlSxY87fVq3STR6r+4cGepyHkcWOQSw==}
@@ -2888,6 +2923,11 @@ packages:
       mimic-fn: 4.0.0
     dev: false
 
+  /opencollective-postinstall@2.0.3:
+    resolution: {integrity: sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==}
+    hasBin: true
+    dev: false
+
   /ora@7.0.1:
     resolution: {integrity: sha512-0TUxTiFJWv+JnjWm4o9yvuskpEJLXTcng8MJuKd+SzAzp2o+OP3HWqNhB4OdJRt1Vsd9/mR0oyaEYlOnL7XIRw==}
     engines: {node: '>=16'}
@@ -3647,6 +3687,15 @@ packages:
     engines: {node: '>= 0.4'}
     dev: false
 
+  /swup@4.6.1:
+    resolution: {integrity: sha512-NPjtE00n2aT0QLDChefU7d/eqqz1zwLXsCCCLz7Vi/sLoszC3eicg3oVO0uLtwM1/qz0na3nGRNw3Avwm4VSfw==}
+    requiresBuild: true
+    dependencies:
+      delegate-it: 6.1.0
+      opencollective-postinstall: 2.0.3
+      path-to-regexp: 6.2.1
+    dev: false
+
   /tailwindcss@3.4.1:
     resolution: {integrity: sha512-qAYmXRfk3ENzuPBakNK0SRrUDipP8NQnEY6772uDhflcQz5EhRdD7JNZxyrFHVQNCwULPBn6FNPp9brpO7ctcA==}
     engines: {node: '>=14.0.0'}
@@ -3789,6 +3838,10 @@ packages:
   /type-fest@2.19.0:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
+    dev: false
+
+  /typed-query-selector@2.11.2:
+    resolution: {integrity: sha512-6rZP+cG3wPg2w1Zqv2VCOsSqlkGElrLSGeEkyrIU9mHG+JfQZE/6lE3oyQouz42sTS9n8fQXvwQBaVWz6dzpfQ==}
     dev: false
 
   /typesafe-path@0.2.2:

@@ -5,6 +5,7 @@ interface Props {
 import Navigation from "@components/Nav.astro";
 import Footer from "@components/Footer.astro";
 import { ViewTransitions } from "astro:transitions";
+import LoadingIndicator from "astro-loading-indicator/component";
 const { page_title } = Astro.props;
 ---
 
@@ -18,6 +19,7 @@ const { page_title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <slot name="in_head" />
     <ViewTransitions />
+    <LoadingIndicator color="#7e22ce" />
     <title>{page_title}</title>
   </head>
   <body>
