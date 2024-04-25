@@ -19,9 +19,7 @@ pip install matplotlib
 
 ### 安装 numpy
 
-**好消息**: Termux 官方软件源中有 Numpy 最新版本 1.25.1
-
-**坏消息**: Matplotlib 它不用，非要安装老版本 numpy==1.23.2
+Termux 官方软件源中有 Numpy 最新版本 1.25.1, 但是 Matplotlib 使用的仍是老版本 numpy==1.23.2。
 
 自 3.7.0 版本开始 Matplotlib 开始使用`oldest-supported-numpy`来构建[^1]，`oldest-supported-numpy`在给定的 Python 版本和平台上提供最旧的 NumPy 版本的作为构建时依赖项。
 

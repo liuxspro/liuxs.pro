@@ -1,5 +1,5 @@
 ---
-title: "Termux 下安装 Mitmproxy"
+title: "Termux 安装 Mitmproxy"
 tags: ["Termux", "Mitmproxy"]
 date: 2023-06-22T10:22:35+08:00
 draft: false
