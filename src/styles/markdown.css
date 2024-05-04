@@ -22,16 +22,22 @@
 }
 /* 正文字体 */
 p {
-  @apply text-base/8 my-4 font-medium primary-text-color;
+  @apply text-base/8 my-2 font-medium primary-text-color;
 }
+
+/* 标题 */
 h1 {
   @apply text-2xl font-semibold; /* 字体设置 */
   @apply my-6;
 }
 h2 {
-  @apply my-4 text-lg leading-7;
-  @apply border-l-8 border-orange-700 px-2;
-  @apply dark:border-orange-400;
+  @apply my-4 text-lg font-bold leading-7;
+  @apply mt-6 mb-6 pt-8 text-2xl border-t border-gray-300 dark:border-gray-500;
+}
+
+h3 {
+  @apply my-4 font-bold leading-5;
+  @apply border-l-4  px-2 border-orange-700 dark:border-orange-400;
 }
 
 /* 代码框 */
