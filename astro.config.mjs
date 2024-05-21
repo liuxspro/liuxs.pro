@@ -13,7 +13,7 @@ const shikiConfig = {
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind({ applyBaseStyles: false }), mdx()],
+  integrations: [tailwind(), mdx()],
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
