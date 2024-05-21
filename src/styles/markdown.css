@@ -22,7 +22,15 @@
 }
 /* 正文字体 */
 p {
-  @apply text-base/8 my-2 font-medium primary-text-color;
+  @apply text-base/8 my-2 font-medium;
+}
+
+/* 设置颜色 */
+h2,
+h3,
+li,
+p {
+  @apply primary-text-color;
 }
 
 /* 标题 */
@@ -108,10 +116,27 @@ sup a {
   @apply after:content-[']'] before:content-['['];
   @apply mr-1 decoration-sky-600 text-sky-600;
   @apply dark:text-sky-300 dark:decoration-sky-300;
+  @apply font-din;
 }
 
-section.footnotes {
-  @apply mt-6 border-t;
+/* 无序列表 */
+
+article ul {
+  @apply list-disc list-inside;
+}
+
+/* 有序列表 */
+
+ol {
+  @apply list-decimal pl-6;
+}
+
+/* 脚注设置 */
+section.footnotes p {
+  @apply text-sm;
+}
+section.footnotes ol {
+  @apply text-sm font-din;
 }
 
 html.dark pre.astro-code-themes {

@@ -1,5 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "din";
   src: url(/fonts/DINPro-Medium.woff2) format("woff2");
   font-display: swap;
+}
+/* 字体颜色 */
+@layer components {
+  /* 正文字体颜色 */
+  .primary-text-color {
+    @apply text-gray-800 dark:text-gray-300;
+  }
+  .info-text-color {
+    @apply text-gray-700 dark:text-gray-400;
+  }
+  .title-text-color {
+    @apply text-gray-800 dark:text-gray-200;
+  }
 }
