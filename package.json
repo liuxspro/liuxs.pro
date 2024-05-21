@@ -10,19 +10,19 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.9",
+    "@astrojs/check": "^0.5.10",
     "@astrojs/mdx": "^2.3.1",
     "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.5.5",
+    "astro": "^4.8.6",
     "astro-loading-indicator": "^0.3.0",
     "clipboard": "^2.0.11",
-    "dayjs": "^1.11.10",
+    "dayjs": "^1.11.11",
     "rehype-katex": "^7.0.0",
     "remark-math": "^6.0.0",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.2"
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "daisyui": "^4.7.3"
+    "daisyui": "^4.11.1"
   }
 }
