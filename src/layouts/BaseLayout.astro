@@ -2,6 +2,7 @@
 interface Props {
   page_title: string;
 }
+import "@styles/base.css";
 import Navigation from "@components/Nav.astro";
 import Footer from "@components/Footer.astro";
 import { ViewTransitions } from "astro:transitions";
@@ -19,7 +20,7 @@ const { page_title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <slot name="in_head" />
     <ViewTransitions />
-    <LoadingIndicator color="#7e22ce" height="4px" />
+    <LoadingIndicator color="#7e22ce" height="3px" />
     <title>{page_title}</title>
   </head>
   <body>
