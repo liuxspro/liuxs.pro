@@ -99,7 +99,8 @@ blockquote p code {
 }
 
 /* code `行内代码` */
-p code {
+p code,
+li code {
   white-space: nowrap;
   @apply px-1.5 py-1 rounded-md bg-gray-900/10 mx-2 text-orange-700 text-sm;
   @apply dark:bg-gray-100/20 dark:text-orange-300;
@@ -123,6 +124,10 @@ sup a {
 
 article ul {
   @apply list-disc list-inside;
+}
+
+article ul li {
+  @apply py-[2px];
 }
 
 /* 有序列表 */

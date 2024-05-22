@@ -6,6 +6,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        sans: ["Arial", ...defaultTheme.fontFamily.sans],
+        seri: ["Times New Roman", ...defaultTheme.fontFamily.serif],
         din: ["din", ...defaultTheme.fontFamily.sans],
       },
     },
