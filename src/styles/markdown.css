@@ -48,7 +48,7 @@ h3 {
   @apply border-l-4  px-2 border-orange-700 dark:border-orange-400;
 }
 
-a {
+article a {
   @apply text-blue-500 font-semibold hover:underline;
 }
 
