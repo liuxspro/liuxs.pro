@@ -3,6 +3,12 @@ import MarkdownLayout from "@layouts/MarkdownLayout.astro";
 const watching_resp = await fetch("https://api.liuxs.pro/douban/watching?userid=53470329");
 const watching = await watching_resp.json();
 
+interface doubanItem {
+  title: string;
+  date: string;
+  pic: string;
+}
+
 // const status_resp = await fetch("");
 // const status = await status_resp.json();
 
@@ -17,7 +23,7 @@ const watching = await watching_resp.json();
     <h2>在看 （{watching.count}）</h2>
     <div class="flex flex-row">
       {
-        watching["items"].map((p) => (
+        watching["items"].map((p: doubanItem) => (
           <div class="p-2">
             <div>
               <div class="text-sm font-semibold">{p.title}</div>
