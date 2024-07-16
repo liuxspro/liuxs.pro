@@ -1,0 +1,41 @@
+---
+import IconDate from "@components/icons/date.astro";
+
+interface doubanItem {
+  title: string;
+  date: string;
+  pic: string;
+  url: string;
+}
+interface Props {
+  Items: doubanItem[];
+  action: string;
+}
+
+const { Items, action } = Astro.props;
+---
+
+<div class="flex flex-wrap justify-between">
+  {
+    Items.map((p) => (
+      <div class="p-2 flex flex-row min-w-96 max-w-96">
+        <div class="shadow-lg flex shrink-0">
+          <img src={p.pic} alt="" referrerpolicy="no-referrer" class="lg:w-28 w-20" />
+        </div>
+        <div class="px-4">
+          <div class="font-semibold">
+            <a href={p.url} target="_blank">
+              {p.title}
+            </a>
+          </div>
+          <div class="text-sm font-din flex flex-row items-center space-x-1">
+            <IconDate class_="w-4 h-4" />
+            <span>
+              {p.date} {action}
+            </span>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>

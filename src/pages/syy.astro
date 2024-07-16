@@ -1,5 +1,6 @@
 ---
 import MarkdownLayout from "@layouts/MarkdownLayout.astro";
+import DoubanItemList from "@components/DoubanItem.astro";
 const watching_resp = await fetch("https://api.liuxs.pro/douban/watching?userid=53470329");
 const watching = await watching_resp.json();
 
@@ -7,53 +8,24 @@ interface doubanItem {
   title: string;
   date: string;
   pic: string;
+  url: string;
 }
 
 // const status_resp = await fetch("");
 // const status = await status_resp.json();
 
-// const wish_resp = await fetch("https://api.liuxs.pro/douban/wish?userid=53470329");
-// const wish = await wish_resp.json();
+const wish_resp = await fetch("https://api.liuxs.pro/douban/wish?userid=53470329");
+const wish = await wish_resp.json();
 ---
 
 <MarkdownLayout title="书·影·音">
   <h1>我的书影音</h1>
-
   <div>
-    <h2>在看 （{watching.count}）</h2>
-    <div class="flex flex-row">
-      {
-        watching["items"].map((p: doubanItem) => (
-          <div class="p-2">
-            <div>
-              <div class="text-sm font-semibold">{p.title}</div>
-              <div class="text-sm font-din">{p.date}</div>
-              <div class="shadow-lg">
-                <img src={p.pic} alt="" referrerpolicy="no-referrer" class="lg:w-32 w-24" />
-              </div>
-            </div>
-          </div>
-        ))
-      }
-    </div>
+    <h2>在看 <span class="px-2 text-sm rounded-md bg-sky-400 font-din">{watching.count}</span></h2>
+    <DoubanItemList Items={watching["items"]} action="开始观看" />
   </div>
-
   <div>
-    <!-- <h2>想看 ({wish.count})</h2>
-    <div class="flex flex-row flex-wrap">
-      {
-        wish["items"].slice(0, 10).map((p) => (
-          <div class="p-2">
-            <div>
-              <div>{p.title}</div>
-              <div class="text-sm font-din">{p.date}</div>
-              <div class="shadow-md">
-                <img src={p.pic} alt="" referrerpolicy="no-referrer" class="w-32" />
-              </div>
-            </div>
-          </div>
-        ))
-      }
-    </div> -->
+    <h2>想看 <span class="px-2 text-sm rounded-md bg-sky-400 font-din">{wish.count}</span></h2>
+    <DoubanItemList Items={wish["items"]} action="标记为想看" />
   </div>
 </MarkdownLayout>
