@@ -9,5 +9,6 @@
       "@layouts/*": ["src/layouts/*"],
       "@styles/*": ["src/styles/*"]
     }
-  }
+  },
+  "exclude": ["dist"] // see https://github.com/withastro/language-tools/issues/643
 }
