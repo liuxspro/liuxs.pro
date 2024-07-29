@@ -4,13 +4,6 @@ import DoubanItemList from "@components/DoubanItem.astro";
 const watching_resp = await fetch("https://api.liuxs.pro/douban/watching?userid=53470329");
 const watching = await watching_resp.json();
 
-interface doubanItem {
-  title: string;
-  date: string;
-  pic: string;
-  url: string;
-}
-
 // const status_resp = await fetch("");
 // const status = await status_resp.json();
 
