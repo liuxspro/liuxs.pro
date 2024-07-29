@@ -1,10 +1,15 @@
 ---
 import Layout from "@layouts/BaseLayout.astro";
 import PostsMenu from "@components/PostsMenu.astro";
+
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-const allPosts = await getCollection("blog");
+
+const allPosts = await getCollection("blog", ({ data }) => {
+  return data.draft === false; // 仅返回 frontmatter 中 `draft: false` 的条目
+});
 const title = "Blog";
+
 allPosts.sort((a, b) => {
   const a_date = new Date(a.data.date).valueOf();
   const b_date = new Date(b.data.date).valueOf();
