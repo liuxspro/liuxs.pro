@@ -154,6 +154,15 @@ section.footnotes ol {
   @apply text-sm font-din;
 }
 
+table {
+  @apply w-full;
+}
+
+th,
+td {
+  @apply border p-1 text-center text-sm;
+}
+
 html.dark pre.astro-code-themes {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
