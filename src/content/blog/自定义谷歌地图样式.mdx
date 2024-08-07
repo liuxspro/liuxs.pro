@@ -1,0 +1,36 @@
+---
+title: 自定义谷歌地图样式
+tags:
+  - GIS
+  - MDX
+date: 2023-08-07T15:52:35+08:00
+draft: false
+---
+
+
+```javascript
+label: "s.e:l|p.v:off", // 隐藏标签
+administrative: "s.t:1|s.e.g|p.v:off", // 隐藏行政区划
+road: "s.t:3|s.e.g|p.v:off", // 隐藏路网
+poi: "s.t:2|s.e.g|p.v:off", // 隐藏POI
+water: "s.t:6|s.e.l|p.v:off", // 隐藏水系
+```
+
+
+import Map from "@components/olmap.vue"
+
+
+<Map client:load />
+
+
+来源[^1]
+```text
+s.t:3|s.e:l|p.v:off
+```
+
+相关工具:
+- [Styling Wizard: Google Maps APIs](https://mapstyle.withgoogle.com/)
+- [GMaps API Style Encoder](https://github.com/julienben/gmaps-apistyle-encoder)
+
+[^1]: [stackoverflow.com: customizing-google-map-tile-server-url](https://stackoverflow.com/questions/29692737/customizing-google-map-tile-server-url)
+
