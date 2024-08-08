@@ -5,10 +5,19 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@styles/*": ["src/styles/*"]
-    }
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ]
+    },
+    "jsx": "preserve"
   },
-  "exclude": ["dist"] // see https://github.com/withastro/language-tools/issues/643
+  "exclude": [
+    "dist"
+  ]
 }

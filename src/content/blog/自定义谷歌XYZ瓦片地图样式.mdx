@@ -1,0 +1,104 @@
+---
+title: 自定义谷歌 XYZ 瓦片地图样式
+tags:
+  - GIS
+  - MDX
+  - Google Map
+date: 2024-08-07T15:52:35+08:00
+draft: false
+---
+
+### 常用的谷歌瓦片地址
+
+网上流传的谷歌地图瓦片地址一般为:`https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}`
+
+其中`lyrs`为地图类型, 主要有以下几种：
+
+```text
+https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}  // 纯卫星影像
+https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}  // 纯卫星影像(带路网和助记)
+https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}  // 街道
+https://mt1.google.com/vt/lyrs=t&x={x}&y={y}&z={z}  // 地形晕染(灰度图)
+https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}  // 地形晕染(带路网和助记)
+https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}  // 路网和助记
+```
+
+众所周知, 谷歌地图的路网和助记使用的是火星坐标系(GCJ-02),会有一定的偏移, 而且会有行政区划标记错误的问题, 所以我一般只使用不含路网和助记的纯影像图。
+
+纯卫星影像图很容易获得, 地形晕染, 因为它默认是带路网和助记的, 我一直以为无法获得纯地形晕染图(谷歌的地形晕染还是很漂亮的).
+
+直到某天,群友发了类似这样一串链接:
+```text
+http://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}&apistyle=s.e:l|p.v:off%2Cs.t:1|s.e.g|p.v:off%2Cs.t:3|s.e.g|p.v:off%2Cs.t:2|s.e.g|p.v:off%2Cs.t:4|s.e.g|p.v:off
+```
+
+通过它，就能得到谷歌纯地形晕染图了。
+
+怎么实现的呢？
+
+原来谷歌地图的 XYZ 瓦片是可以通过 apistyle 自定义样式的。
+
+似乎官方也没有文档说明，在 stackoverflow 的这篇帖子[^1]中，有较为详细的介绍。
+
+比如这个代码
+```text
+s.t:3|s.e:l|p.v:off
+```
+
+`s.t:3`   要素类型t, 3 表示 `road`       路网  
+`s.e:l`   元素类型e, l 表示 `lables`     标签  
+`p.v:off` 定义样式 , v 表示 `visibility` 可见性  
+
+连起来的意思就是 路网、路网标签不显示
+
+### 通过在线工具自定义样式
+
+通过 apistyle 可以控制元素、标签是否显示，还可以自定义颜色。
+
+谷歌有一个定制地图样式的网站: https://mapstyle.withgoogle.com/ ，可以可视化的自定义地图样式
+
+定义好样式后, 会得到一个样式json文件, 如：
+
+```json
+[
+  {
+    "featureType": "road",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  }
+]
+```
+
+再通过这个工具 GMaps API Style Encoder[^2] ，可以将样式 style 转换为 apistyle 代码, 应用到 XYZ 瓦片中。
+
+
+### 简易自定义样式工具
+
+简单的控制标签、行政区划、POI、水系等是否显示。
+
+```javascript
+label: "s.e:l|p.v:off", // 隐藏标签
+administrative: "s.t:1|s.e.g|p.v:off", // 隐藏行政区划
+road: "s.t:3|s.e.g|p.v:off", // 隐藏路网
+poi: "s.t:2|s.e.g|p.v:off", // 隐藏POI
+water: "s.t:6|s.e.l|p.v:off", // 隐藏水系
+```
+
+
+import Map from "@components/vue/gmapstyle.vue"
+
+
+<Map client:load />
+
+
+
+
+
+
+[^1]: [stackoverflow.com: customizing-google-map-tile-server-url](https://stackoverflow.com/questions/29692737/customizing-google-map-tile-server-url)
+
+[^2]: [julienben/gmaps-apistyle-encoder](https://github.com/julienben/gmaps-apistyle-encoder)
+
