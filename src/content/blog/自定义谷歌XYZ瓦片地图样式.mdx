@@ -3,6 +3,7 @@ title: 自定义谷歌 XYZ 瓦片地图样式
 tags:
   - GIS
   - MDX
+  - Google Map
 date: 2023-08-07T15:52:35+08:00
 draft: false
 ---
@@ -56,7 +57,7 @@ s.t:3|s.e:l|p.v:off
 
 谷歌有一个定制地图样式的网站: https://mapstyle.withgoogle.com/ ，可以可视化的自定义地图样式
 
-定义好样式后，会得到一个样式json文件，如：
+定义好样式后, 会得到一个样式json文件, 如：
 
 ```json
 [
@@ -87,7 +88,7 @@ water: "s.t:6|s.e.l|p.v:off", // 隐藏水系
 ```
 
 
-import Map from "@components/olmap.vue"
+import Map from "@components/vue/gmapstyle.vue"
 
 
 <Map client:load />
