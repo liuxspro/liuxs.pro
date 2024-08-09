@@ -1,5 +1,4 @@
 <script setup>
-
 import { ref, onMounted, computed } from "vue";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
@@ -19,10 +18,10 @@ const map_style = {
 const sel_basemap_type = ref("p");
 
 const basemap_types = [
-  { text: 's: 卫星图', value: 's' },
-  { text: 'r: 街道图', value: 'm' },
-  { text: 'p: 地形图', value: 'p' },
-]
+  { text: "s: 卫星图", value: "s" },
+  { text: "r: 街道图", value: "m" },
+  { text: "p: 地形图", value: "p" },
+];
 
 const map_switch = ref({
   label: true,
@@ -65,7 +64,6 @@ function create_ol_map() {
   });
 }
 
-
 function handleBaseMapChange(e) {
   sel_basemap_type.value = e.target.value;
   GoogleMap.setUrl(map_url.value);
@@ -78,59 +76,75 @@ function handleChange() {
 onMounted(() => {
   create_ol_map();
 });
-
-
-
 </script>
-
 
 <template>
   <div class="mt-8">
     <div class="flex lg:flex-row flex-col">
       <div id="control" class="lg:w-1/3 lg:pr-4 w-full">
         <p>选择底图</p>
-        <select class="select select-info select-sm w-full max-w-xs" v-model="sel_basemap_type"
-          @change="handleBaseMapChange">
+        <select
+          class="select select-info select-sm w-full max-w-xs"
+          v-model="sel_basemap_type"
+          @change="handleBaseMapChange"
+        >
           <option v-for="option in basemap_types" :value="option.value">
             {{ option.text }}
           </option>
         </select>
         <label class="label cursor-pointer">
           <span class="label-text">标签 Label</span>
-          <input type="checkbox" class="toggle toggle-sm toggle-success" v-model="map_switch.label"
-            @change="handleChange" />
+          <input
+            type="checkbox"
+            class="toggle toggle-sm toggle-success"
+            v-model="map_switch.label"
+            @change="handleChange"
+          />
         </label>
         <label class="label cursor-pointer">
           <span class="label-text">行政区划 Administrative</span>
-          <input type="checkbox" class="toggle toggle-sm toggle-success" v-model="map_switch.administrative"
-            @change="handleChange" />
+          <input
+            type="checkbox"
+            class="toggle toggle-sm toggle-success"
+            v-model="map_switch.administrative"
+            @change="handleChange"
+          />
         </label>
         <label class="label cursor-pointer">
           <span class="label-text">路网 Road</span>
-          <input type="checkbox" class="toggle toggle-sm toggle-success" v-model="map_switch.road"
-            @change="handleChange" />
+          <input
+            type="checkbox"
+            class="toggle toggle-sm toggle-success"
+            v-model="map_switch.road"
+            @change="handleChange"
+          />
         </label>
         <label class="label cursor-pointer">
           <span class="label-text">POI</span>
-          <input type="checkbox" class="toggle toggle-sm toggle-success" v-model="map_switch.poi"
-            @change="handleChange" />
+          <input
+            type="checkbox"
+            class="toggle toggle-sm toggle-success"
+            v-model="map_switch.poi"
+            @change="handleChange"
+          />
         </label>
         <label class="label cursor-pointer">
           <span class="label-text">水系 Water</span>
-          <input type="checkbox" class="toggle toggle-sm toggle-success" v-model="map_switch.water"
-            @change="handleChange" />
+          <input
+            type="checkbox"
+            class="toggle toggle-sm toggle-success"
+            v-model="map_switch.water"
+            @change="handleChange"
+          />
         </label>
       </div>
       <div id="olmap" class="w-full"></div>
     </div>
   </div>
-
-
 </template>
 
-
 <style>
-@import 'ol/ol.css';
+@import "ol/ol.css";
 
 div#olmap {
   height: 460px;
