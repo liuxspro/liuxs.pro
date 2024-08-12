@@ -80,22 +80,16 @@ s.t:3|s.e:l|p.v:off
 简单的控制标签、行政区划、POI、水系等是否显示。
 
 ```javascript
-label: "s.e:l|p.v:off", // 隐藏标签
+label: "s.e:l|p.v:off",                 // 隐藏标签
 administrative: "s.t:1|s.e.g|p.v:off", // 隐藏行政区划
-road: "s.t:3|s.e.g|p.v:off", // 隐藏路网
-poi: "s.t:2|s.e.g|p.v:off", // 隐藏POI
-water: "s.t:6|s.e.l|p.v:off", // 隐藏水系
+road: "s.t:3|s.e.g|p.v:off",          // 隐藏路网
+poi: "s.t:2|s.e.g|p.v:off",          // 隐藏POI
+water: "s.t:6|s.e.l|p.v:off",       // 隐藏水系
 ```
-
 
 import Map from "@components/vue/gmapstyle.vue"
 
-
 <Map client:load />
-
-
-
-
 
 
 [^1]: [stackoverflow.com: customizing-google-map-tile-server-url](https://stackoverflow.com/questions/29692737/customizing-google-map-tile-server-url)
