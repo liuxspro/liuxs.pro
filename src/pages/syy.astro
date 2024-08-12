@@ -13,12 +13,30 @@ const wish = await wish_resp.json();
 
 <MarkdownLayout title="书·影·音">
   <h1>我的书影音</h1>
-  <div>
-    <h2>在看 <span class="px-2 text-sm rounded-md bg-sky-400 font-din">{watching.count}</span></h2>
-    <DoubanItemList Items={watching["items"]} action="开始观看" />
-  </div>
-  <div>
-    <h2>想看 <span class="px-2 text-sm rounded-md bg-sky-400 font-din">{wish.count}</span></h2>
-    <DoubanItemList Items={wish["items"]} action="标记为想看" />
+  <div role="tablist" class="tabs tabs-bordered">
+    <!-- bug: Tab text wrap with large content -->
+    <!-- see https://github.com/saadeghi/daisyui/issues/2678 -->
+    <input
+      type="radio"
+      name="my_tabs_1"
+      role="tab"
+      class="tab whitespace-nowrap"
+      aria-label={"在看 " + watching.count}
+    />
+    <div role="tabpanel" class="tab-content pt-4">
+      <DoubanItemList Items={watching["items"]} action="开始观看" />
+    </div>
+
+    <input
+      type="radio"
+      name="my_tabs_1"
+      role="tab"
+      class="tab whitespace-nowrap"
+      aria-label={"想看 " + wish.count}
+      checked="checked"
+    />
+    <div role="tabpanel" class="tab-content pt-4">
+      <DoubanItemList Items={wish["items"]} action="标记为想看" />
+    </div>
   </div>
 </MarkdownLayout>

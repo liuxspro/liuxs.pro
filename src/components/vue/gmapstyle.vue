@@ -1,5 +1,4 @@
 <script setup>
-
 import { ref, onMounted, computed } from "vue";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
@@ -19,10 +18,10 @@ const map_style = {
 const sel_basemap_type = ref("p");
 
 const basemap_types = [
-  { text: 's: 卫星图', value: 's' },
-  { text: 'r: 街道图', value: 'm' },
-  { text: 'p: 地形图', value: 'p' },
-]
+  { text: "s: 卫星图", value: "s" },
+  { text: "r: 街道图", value: "m" },
+  { text: "p: 地形图", value: "p" },
+];
 
 const map_switch = ref({
   label: true,
@@ -65,7 +64,6 @@ function create_ol_map() {
   });
 }
 
-
 function handleBaseMapChange(e) {
   sel_basemap_type.value = e.target.value;
   GoogleMap.setUrl(map_url.value);
@@ -78,14 +76,12 @@ function handleChange() {
 onMounted(() => {
   create_ol_map();
 });
-
-
-
 </script>
-
 
 <template>
   <div class="mt-8">
+    <p>当前瓦片地址:</p>
+    <p class="font-din text-sm p-2 border rounded-md mb-4">{{ map_url }}</p>
     <div class="flex lg:flex-row flex-col">
       <div id="control" class="lg:w-1/3 lg:pr-4 w-full">
         <p>选择底图</p>
@@ -124,13 +120,10 @@ onMounted(() => {
       <div id="olmap" class="w-full"></div>
     </div>
   </div>
-
-
 </template>
 
-
 <style>
-@import 'ol/ol.css';
+@import "ol/ol.css";
 
 div#olmap {
   height: 460px;
