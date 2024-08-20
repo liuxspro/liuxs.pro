@@ -14,7 +14,9 @@ const { Posts } = Astro.props;
       .reverse()
       .map((year) => (
         <div class="flex-col mb-6 sm:flex">
-          <div class="text-xl title-text-color p-2 font-din font-semibold sm:mr-6 sm:text-2xl">{year}</div>
+          <div class="text-xl title-text-color p-2 font-din font-semibold sm:mr-6 sm:text-2xl text-gray-700 dark:text-blue-300">
+            {year}
+          </div>
           <div class="posts grow">{<PostList Posts={Posts[year]} />}</div>
         </div>
       ))
