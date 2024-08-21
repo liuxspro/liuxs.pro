@@ -36,6 +36,7 @@
 <script>
   function apply_theme() {
     const current_theme = localStorage.getItem("theme");
+    console.log("current theme", current_theme);
     //如果localStorage存了主题信息，则根据主题信息设置
     if (current_theme) {
       if (current_theme == "dark") {
@@ -46,6 +47,7 @@
     } else {
       //否则查询系统设置
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        console.log("系统为dark");
         localStorage.theme = "dark";
         document.documentElement.classList.add("dark");
       } else {
@@ -69,7 +71,9 @@
 
   document.addEventListener("astro:page-load", () => {
     apply_theme();
-    const btn_toggle_theme = document.querySelector("#theme-toggle") as HTMLButtonElement;
+    const btn_toggle_theme = document.querySelector(
+      "#theme-toggle"
+    ) as HTMLButtonElement;
     if (btn_toggle_theme) {
       btn_toggle_theme.onclick = toggle_theme;
     }
