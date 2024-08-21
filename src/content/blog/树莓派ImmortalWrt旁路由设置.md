@@ -7,9 +7,9 @@ draft: false
 
 ## 镜像下载
 
-之前一直使用`SuLingGG`的 [OpenWrt-Rpi](https://github.com/SuLingGG/OpenWrt-Rpi) 项目的 Openwrt 镜像，但是现在已经停止更新了。于是使用推荐的 [immortalwrt](https://github.com/immortalwrt/immortalwrt) 项目的官方固件。
+之前一直使用`SuLingGG`的 [OpenWrt-Rpi](https://github.com/SuLingGG/OpenWrt-Rpi) 项目的 Openwrt 镜像，但是现在已经停止更新了。于是使用推荐的 [immortalwrt](https://github.com/immortalwrt/immortalwrt)[^1] 项目的官方固件。
 
-打开固件选择器 [ImmortalWrt Firmware Selector](https://firmware-selector.immortalwrt.org/) 选择机型 `Raspberry Pi 4B/400/4CM (64bit)`，下载固件。
+打开固件选择器 [ImmortalWrt Firmware Selector](https://firmware-selector.immortalwrt.org/)[^2] 选择机型 `Raspberry Pi 4B/400/4CM (64bit)`，下载固件。
 
 ImmortalWrt 也提供了自定义预安装软件包和首次启动配置脚本.
 
@@ -26,20 +26,20 @@ ImmortalWrt 也提供了自定义预安装软件包和首次启动配置脚本.
 
 ## 旁路由设置
 
-旁路由设置可参考`SuLingGG`写的 [自编译 OpenWrt 系列 - 旁路由设置指南](https://mlapp.cn/1008.html)，非常详尽。
+旁路由设置可参考`SuLingGG`写的 [自编译 OpenWrt 系列 - 旁路由设置指南](https://mlapp.cn/1008.html)[^3]，非常详尽。
 由于镜像不同，有些地方的设置有细微差别。关键步骤整理如下。
 
 - 插入写好镜像的 SD 卡，连接电源，启动树莓派，此时不需要插网线
 - 连接树莓派发出的 wifi 信号 🛜`ImmortalWrt`，此时树莓派 的 IP 为 192.168.1.1，访问该地址进入 Openwrt 控制面板（用户名 root，无密码）
 - 更改 Lan 口 IP: 可在网页终端（如果装了 luci-app-ttyd 的话）或者 ssh 登录到树莓派执行
 
-  ```bash
-  uci set network.lan.ipaddr=192.168.31.200
-  uci commit network
-  /etc/init.d/network restart
-  ```
+```bash
+uci set network.lan.ipaddr=192.168.31.200
+uci commit network
+/etc/init.d/network restart
+```
 
-  IP 更改后，Wifi 连接应该会自动断开，再重新连接 Wifi，这时候要访问 192.168.31.200，也就是上一步设置的 IP 地址
+IP 更改后，Wifi 连接应该会自动断开，再重新连接 Wifi，这时候要访问 192.168.31.200，也就是上一步设置的 IP 地址
 
 - 更改 Lan 口参数: 在网络接口中设置网关和 DNS 为上级路由器 IP，并勾选忽略此接口/不在此接口提供 DHCP 服务
 - 将树莓派连接到上级路由器上
@@ -56,10 +56,8 @@ iptables -t nat -I POSTROUTING -j MASQUERADE
 opkg update --no-check-certificate
 ```
 
-## 参考资料
+[^1]: [immortalwrt/immortalwrt: An opensource OpenWrt variant for mainland China users.](https://github.com/immortalwrt/immortalwrt)
 
-[immortalwrt/immortalwrt: An opensource OpenWrt variant for mainland China users.](https://github.com/immortalwrt/immortalwrt)
+[^2]: [ImmortalWrt Downloads](https://downloads.immortalwrt.org/)
 
-[ImmortalWrt Downloads](https://downloads.immortalwrt.org/)
-
-[自编译 OpenWrt 系列 - 旁路由设置指南](https://mlapp.cn/1008.html)
+[^3]: [自编译 OpenWrt 系列 - 旁路由设置指南](https://mlapp.cn/1008.html)
