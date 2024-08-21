@@ -14,5 +14,9 @@ export default {
     },
   },
   plugins: [daisyui],
-  darkMode: "class",
+  // 自定义暗色模式选择器 https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually
+  darkMode: ["selector", '[data-theme="dark"]'],
+  daisyui: {
+    themes: ["light", "dark"],
+  },
 };

@@ -54,11 +54,11 @@ article a {
 
 /* 代码框 */
 pre {
-  @apply p-4 rounded-md overflow-auto text-sm;
+  @apply p-4 rounded-md overflow-auto text-sm dark:border-blue-800;
 }
 
 pre.astro-code {
-  @apply my-2 relative border dark:border-slate-500;
+  @apply my-2 relative border dark:border-zinc-700;
 }
 
 /* 复制按钮 */
@@ -163,7 +163,7 @@ td {
   @apply border p-1 text-center text-sm;
 }
 
-html.dark pre.astro-code-themes {
+[data-theme="dark"] pre.astro-code-themes {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
   /* 可选，用于定义字体样式 */
