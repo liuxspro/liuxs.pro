@@ -1,12 +1,18 @@
-<footer class="flex justify-center text-xs text-gray-600 dark:text-gray-300">
-  <div class="py-2">
-    <div class="text-center font-din">
-      <span itemprop="copyrightYear">© 2022-2023 Liuxspro |</span>
+---
+import dayjs from "dayjs";
+const now = dayjs();
+const formattedDate = now.format("YYYY/MM/DD HH:mm:ss");
+---
+
+<footer class="flex justify-center text-xs text-base-content">
+  <div class="py-2 font-din">
+    <div class="text-center">
+      <span itemprop="copyrightYear">© 2019-2024 Liuxspro |</span>
       <span>CC-BY-NC-4.0</span>
     </div>
-    <div class="font-din">
+    <div>
       Powered by
-      <a href="https://astro.build/" target="_blank" rel="noopener noreffer" class="text-green-700 hover:underline">
+      <a href="https://astro.build/" target="_blank" rel="noopener noreffer" class="text-success hover:underline">
         {Astro.generator}
       </a>
       <span>| Source code:</span>
@@ -14,8 +20,9 @@
         href="https://github.com/liuxspro/liuxs.pro"
         target="_blank"
         rel="noopener noreffer"
-        class="text-green-700 hover:underline">liuxs.pro</a
+        class="text-success hover:underline">liuxs.pro</a
       >
+      <div class="text-center"><span>Build At:{formattedDate}</span></div>
     </div>
   </div>
 </footer>
