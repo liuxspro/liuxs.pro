@@ -32,6 +32,9 @@ importers:
       dayjs:
         specifier: ^1.11.12
         version: 1.11.12
+      lightgallery:
+        specifier: ^2.7.2
+        version: 2.7.2
       ol:
         specifier: ^10.0.0
         version: 10.0.0
@@ -1602,6 +1605,10 @@ packages:
 
   lerc@3.0.0:
     resolution: {integrity: sha512-Rm4J/WaHhRa93nCN2mwWDZFoRVF18G1f47C+kvQWyHGEZxFpTUi73p7lMVSAndyxGt6lJ2/CFbOcf9ra5p8aww==}
+
+  lightgallery@2.7.2:
+    resolution: {integrity: sha512-Ewdcg9UPDqV0HGZeD7wNE4uYejwH2u0fMo5VAr6GHzlPYlhItJvjhLTR0cL0V1HjhMsH39PAom9iv69ewitLWw==}
+    engines: {node: '>=6.0.0'}
 
   lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
@@ -4425,6 +4432,8 @@ snapshots:
   kolorist@1.8.0: {}
 
   lerc@3.0.0: {}
+
+  lightgallery@2.7.2: {}
 
   lilconfig@2.1.0: {}
 
