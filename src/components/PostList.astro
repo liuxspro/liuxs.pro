@@ -12,11 +12,8 @@ const { Posts } = Astro.props;
   {
     Posts.map((p) => (
       <div class="p-2 border-b border-dashed border-gray-300">
-        <a
-          href={`/blog/${p.slug}/`}
-          class="flex justify-between items-center py-2"
-        >
-          <span class="font-din truncate text-gray-700 text-sm hover:text-gray-900 hover:font-semibold sm:text-base dark:text-cyan-300">
+        <a href={`/blog/${p.slug}/`} class="flex justify-between items-center py-2">
+          <span class="font-din truncate text-gray-700 text-sm hover:text-gray-900 hover:font-semibold sm:text-base dark:text-cyan-300 dark:hover:text-blue-400">
             {p.data.title}
           </span>
           <span class="text-sm font-mono text-gray-700 dark:text-gray-400">

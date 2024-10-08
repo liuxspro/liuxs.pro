@@ -18,19 +18,27 @@ const { page_title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/favicon-64.png" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // ☝️ This script prevent the FART effect.
+      if (localStorage.getItem("theme") === null) {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
+      // "theme" LocalStorage value is set by the package to remember user preference.
+      // The value is checked and applyed before rendering anything.
+    </script>
     <slot name="in_head" />
     <ViewTransitions />
     <LoadingIndicator color="#7e22ce" height="3px" />
     <title>{page_title}</title>
   </head>
   <body>
-    <div id="container" class="flex flex-col bg-slate-50 dark:bg-gray-700 min-h-screen">
+    <div id="container" class="flex flex-col min-h-screen bg-base-100">
       <header>
         <Navigation />
       </header>
       <main class="flex grow shrink-0 justify-center space-x-4">
         <aside class="hidden lg:block basis-1/6"></aside>
-        <div class="w-full m-2 p-4 sm:w-10/12 lg:p-8 lg:w-7/12 dark:text-cyan-300 basis-1/2 flex-1">
+        <div class="w-full m-2 p-4 sm:w-10/12 lg:p-8 lg:w-7/12 basis-1/2 flex-1">
           <slot />
         </div>
         <aside class="hidden lg:block basis-0 lg:basis-1/6 p-4"></aside>
