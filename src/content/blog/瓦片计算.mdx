@@ -2,6 +2,7 @@
 title: 瓦片地图及其计算
 tags:
   - GIS
+  - XYZ
   - MDX
 date: 2024-09-15T18:10:03+08:00
 draft: false
@@ -11,11 +12,12 @@ draft: false
 
 瓦片地图(Tiled web map[^1])一种通过分块技术将大范围地图按固定大小的图像或数据块（称为“瓦片”）分割，方便地图在网络或其他应用中快速加载和显示的技术。
 
-需要约定或标准的切片 Web 地图的属性包括切片的大小、缩放级别的编号、要使用的投影、单个切片的编号或以其他方式标识方式以及请求它们的方法。
+标准的切片 Web 地图的属性主要包括：
 
 - 图块一般为 256x256 像素
 - 最小层级 0 情况下，可以在单个地图图块中渲染整个世界
 - 每个缩放级别在 XY 两个维度上都加倍，因此在放大时，单个图块将替换为 4 个图块
+- 使用 Web Mercator 投影(EPSG:3857)，纬度限制约为85°
 
 ![XYZ_Tile](https://drive.liuxs.pro/api/raw/?path=/Images/blog/XYZ_Tiles.png)
 > 图片来自: https://en.wikipedia.org/wiki/File:XYZ_Tiles.png
@@ -23,24 +25,50 @@ draft: false
 
 ### 切片方法
 
-1. Google Maps / OpenStreetMap
-2. Tile Map Service(TMS)
+#### 1.Google Maps / OpenStreetMap
+
+大多数平铺 Web 地图都遵循某些 Google 地图惯例，事实上的 OpenStreetMap 标准，称为 Slippy Map Tilenames 或 XYZ.
+
+原点坐标在**左上角**
+
+#### 2.Tile Map Service(TMS)
+
+OpenLayers 的早期标准，与XYZ的区别是 y 轴在 TMS 中向北为正, 即原点在**左下角**.
+
+可通过以下公式计算得到 XYZ 的 Y 值
+
+$$
+Y = 2^z - 1 - Y_{tms}
+$$
+
+js代码如下:
+```javascript
+// 在编程语言中，左移运算较快
+// y = Math.pow(2, z) - y - 1;
+y = (1 << z) - y - 1;
+```
+
+> 参考阅读: [The difference between XYZ and TMS tiles and how to convert between them (github.com)](https://gist.github.com/tmcw/4954720)
+
+#### 3.QuadTrees
+
+Bing Map 使用 Quadkeys 进行寻址[^2]。
 
 ### 缩放级别
 
-缩放级别(zoom)一般为 0~18,zoom level 为 0 时,需要 1 张瓦片,zoom level 为 n 时,需要 $2^n$ 张瓦片
+缩放级别(zoom)一般为 0~18,zoom level 为 0 时,需要 1 张瓦片,zoom level 为 n 时,需要 $2^2n$ 张瓦片
 
 > 一般地图服务商提供地图的最大分辨率为亚米级，18 级时影像分辨率为 0.5972m，所以 zoom 一般为18.
 
-Openlayer 提供了调试瓦片,可以显示每个瓦片的坐标[^2]:
+Openlayer 提供了调试瓦片,可以显示每个瓦片的坐标[^3]:
 
 import Map from "@components/vue/TileDebug.vue";
 
 <Map client:load />
 
-## 计算瓦片编号
+## 瓦片编号的计算
 
-可根据以下公式计算[^3]：
+可根据以下公式计算[^4]：
 
 $ x=\left \lfloor \frac{lon+180}{360} \cdot 2^{z} \right \rfloor $  
 $ y=\left \lfloor (1-\frac{ \ln (\tan (lat\cdot \frac{\pi }{180} )+\frac{1}{\cos(lat\cdot \frac{\pi}{180} )} )}{\pi}) \cdot 2^{z-1} \right \rfloor $  
@@ -55,8 +83,10 @@ import TileCalc from "@components/vue/TileCalc.vue";
 
 [OpenLayers 3 Primer - 瓦片计算](http://primer.openlayers.cn/ol3-primer/ch06/06-02.html)  
 **flutter_map**的 Demo: [Tile Builder](https://demo.fleaflet.dev/tile_builder)  
-[Bing Maps Tile System](https://learn.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system)
+
 
 [^1]: [Tiled web map - Wikipedia](https://en.wikipedia.org/wiki/Tiled_web_map)
-[^2]: [ol/source/TileDebug - OpenLayers API](https://openlayers.org/en/latest/apidoc/module-ol_source_TileDebug-TileDebug.html)
-[^3]: [Slippy map tilenames](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)
+[^2]: [Bing Maps Tile System](https://learn.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system)
+[^3]: [ol/source/TileDebug - OpenLayers API](https://openlayers.org/en/latest/apidoc/module-ol_source_TileDebug-TileDebug.html)
+[^4]: [Slippy map tilenames](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)
+
