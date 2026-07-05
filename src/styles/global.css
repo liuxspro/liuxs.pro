@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@import "./base.css";
+
+@theme {
+  --font-din: "din", sans-serif;
+}
