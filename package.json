@@ -18,5 +18,6 @@
   },
   "allowScripts": {
     "esbuild": true
-  }
+  },
+  "packageManager": "pnpm@10.13.1"
 }
