@@ -1,0 +1,18 @@
+---
+import background from "../assets/background.svg";
+---
+
+<img
+  id="background"
+  src={background.src}
+  alt=""
+  fetchpriority="high"
+  class="width-full height-full fixed top-0 left-0"
+/>
+
+<style>
+  #background {
+    z-index: -1;
+    filter: blur(100px);
+  }
+</style>

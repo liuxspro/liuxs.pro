@@ -1,0 +1,23 @@
+---
+import icon from "../assets/icon.png";
+---
+
+<nav
+  class="flex items-center justify-between px-4 lg:px-8 py-5 shadow-sm shadow-base-300 bg-base-100 text-base-content"
+>
+  <div class="font-semibold mx-4">
+    <div class="avatar flex items-center space-x-2">
+      <div class="w-6">
+        <img class="rounded" src={icon.src} />
+      </div>
+      <a href="/">Liuxs' Blog</a>
+    </div>
+  </div>
+  <div id="menu" class="flex lg:pr-16 items-center">
+    <ul class="flex items-center space-x-4 mx-4">
+      <li>
+        <a href="/blog">Posts</a>
+      </li>
+    </ul>
+  </div>
+</nav>
