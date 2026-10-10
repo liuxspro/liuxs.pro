@@ -2,6 +2,7 @@
   "name": "liuxs-pro",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@12.10.1",
   "engines": {
     "node": ">=22.12.0"
   },
