@@ -1,17 +1,19 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Prose from "@components/Prose.astro";
+import "../../styles/md.css";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("demo");
-    return posts.map((post) => ({
-        params: { id: post.id },
-        props: { post },
-    }));
+  const posts = await getCollection("demo");
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
 }
 
 interface Props {
-    post: CollectionEntry<"demo">;
+  post: CollectionEntry<"demo">;
 }
 
 const { post } = Astro.props;
@@ -19,8 +21,10 @@ const { Content } = await render(post);
 ---
 
 <Layout>
-    <article class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
-        <h1 class="mb-6 text-3xl font-bold">{post.data.title}</h1>
-        <Content />
-    </article>
+  <article class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+    <h1 class="mb-6 text-3xl font-bold">{post.data.title}</h1>
+    <Prose>
+      <Content />
+    </Prose>
+  </article>
 </Layout>

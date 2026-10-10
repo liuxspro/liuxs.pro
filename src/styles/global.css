@@ -1,1 +1,15 @@
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
+/* 统一的文章排版：结构 + 逐元素微调集中在此，供各版块复用。
+   用法：<div class="prose-custom"><slot /></div> */
+@layer components {
+  .prose-custom {
+    @apply prose dark:prose-invert max-w-none;
+    @apply prose-h1:font-bold prose-h1:text-xl;
+    @apply prose-a:text-blue-600;
+    @apply prose-p:text-justify;
+    @apply prose-img:rounded-md;
+    @apply prose-blockquote:not-italic;
+  }
+}
