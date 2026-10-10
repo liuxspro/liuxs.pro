@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import { satteri } from "@astrojs/markdown-satteri";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -9,6 +10,9 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+  },
+  markdown: {
+    processor: satteri({ features: { math: true } }),
   },
 
   integrations: [mdx()],
