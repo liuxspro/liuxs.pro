@@ -1,4 +1,29 @@
-<div id="map"></div>
+---
+interface Props {
+    width?: string;
+    height?: string;
+    class?: string;
+    style?: string;
+}
+const {
+    width = "100%",
+    height = "100%",
+    class: className,
+    style,
+} = Astro.props;
+
+const id = `map-${crypto.randomUUID()}`;
+const classes = ["rounded-md", "shadow-md", className]
+    .filter(Boolean)
+    .join(" ");
+---
+
+<div
+    id={id}
+    data-maplibre-map
+    class={classes}
+    style={`width:${width};height:${height};${style ?? ""}`}
+></div>
 
 <script>
     import { Map, setWorkerUrl } from "maplibre-gl";
@@ -7,17 +32,14 @@
 
     setWorkerUrl(workerUrl);
 
-    const map = new Map({
-        container: "map",
-        style: "https://tiles.openfreemap.org/styles/bright",
-        center: [107, 34],
-        zoom: 3,
-    });
+    document
+        .querySelectorAll<HTMLElement>("[data-maplibre-map]")
+        .forEach((container) => {
+            new Map({
+                container,
+                style: "https://tiles.openfreemap.org/styles/bright",
+                center: [107, 34],
+                zoom: 3,
+            });
+        });
 </script>
-
-<style>
-    #map {
-        width: 100%;
-        height: 100%;
-    }
-</style>
