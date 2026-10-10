@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+
+const posts = (await getCollection("demo")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Layout>
+    <div class="mx-auto max-w-3xl px-4 py-8">
+        <h1 class="mb-6 text-2xl font-bold">Demo</h1>
+
+        {posts.length === 0 ? (
+            <p class="text-gray-500">暂无条目。</p>
+        ) : (
+            <ul class="space-y-3">
+                {posts.map((post) => (
+                    <li class="flex items-baseline justify-between gap-4">
+                        <a
+                            class="font-medium hover:underline"
+                            href={`/demo/${post.id}`}
+                        >
+                            {post.data.title}
+                        </a>
+                        <time
+                            class="shrink-0 text-sm text-gray-500"
+                            datetime={post.data.date.toISOString()}
+                        >
+                            {post.data.date.toLocaleDateString("zh-CN")}
+                        </time>
+                    </li>
+                ))}
+            </ul>
+        )}
+    </div>
+</Layout>
