@@ -13,6 +13,9 @@ export default defineConfig({
   },
   markdown: {
     processor: satteri({ features: { math: true } }),
+    shikiConfig: {
+      theme: "snazzy-light",
+    },
   },
 
   integrations: [mdx()],

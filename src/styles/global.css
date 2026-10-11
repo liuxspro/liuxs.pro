@@ -10,6 +10,14 @@
     @apply prose-a:text-blue-600;
     @apply prose-p:text-justify;
     @apply prose-img:rounded-md;
+    @apply prose-img:mx-auto;
     @apply prose-blockquote:not-italic;
+  }
+
+  /* $$...$$ 数学公式块会渲染成不带 astro-code 的裸 <pre>，
+     typography 会给它套上深色 code 底色，这里单独覆盖 */
+  .prose-custom pre:not(.astro-code) {
+    @apply bg-gray-100 dark:bg-gray-800/60;
+    color: inherit;
   }
 }
