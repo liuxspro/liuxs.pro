@@ -14,6 +14,16 @@
     @apply prose-blockquote:not-italic;
   }
 
+  /* 手机端正文略大（18px），≥640px（Tailwind sm）回到 1rem 16px */
+  .prose-custom {
+    font-size: 1.125rem;
+  }
+  @media (min-width: 40rem) {
+    .prose-custom {
+      font-size: 1rem;
+    }
+  }
+
   /* $$...$$ 数学公式块会渲染成不带 astro-code 的裸 <pre>，
      typography 会给它套上深色 code 底色，这里单独覆盖 */
   .prose-custom pre:not(.astro-code) {
