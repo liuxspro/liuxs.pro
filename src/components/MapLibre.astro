@@ -26,7 +26,7 @@ const classes = ["rounded-md", "shadow-md", className]
 ></div>
 
 <script>
-    import { Map, setWorkerUrl } from "maplibre-gl";
+    import { Map, setWorkerUrl, NavigationControl } from "maplibre-gl";
     import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
     import "maplibre-gl/dist/maplibre-gl.css";
 
@@ -35,11 +35,20 @@ const classes = ["rounded-md", "shadow-md", className]
     document
         .querySelectorAll<HTMLElement>("[data-maplibre-map]")
         .forEach((container) => {
-            new Map({
+            const map = new Map({
                 container,
                 style: "https://tiles.openfreemap.org/styles/bright",
                 center: [107, 34],
                 zoom: 3,
             });
+            // 指北针
+            map.addControl(
+                new NavigationControl({
+                    showCompass: true,
+                    showZoom: true,
+                    visualizePitch: true,
+                }),
+                "top-right",
+            );
         });
 </script>
