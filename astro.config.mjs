@@ -14,7 +14,13 @@ export default defineConfig({
   },
   markdown: {
     processor: satteri({
-      features: { math: true, rawHtml: true },
+      features: {
+        math: true,
+        rawHtml: true,
+        gfm: {
+          footnotes: { label: "参考" },
+        },
+      },
       mdastPlugins: [satteriMathjax()],
     }),
     shikiConfig: {
