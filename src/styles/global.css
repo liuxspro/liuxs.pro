@@ -22,6 +22,31 @@
     color: inherit;
   }
 
+  /* 代码块复制按钮 */
+  .code-block-wrapper {
+    position: relative;
+  }
+
+  .code-copy-button {
+    @apply absolute top-3 right-3 z-10 cursor-pointer rounded-md border border-gray-200 bg-white/90 px-2 py-1 text-xs text-gray-600 shadow-sm backdrop-blur transition-opacity focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-gray-700 dark:bg-gray-800/90 dark:text-gray-300;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .code-block-wrapper:hover .code-copy-button,
+  .code-copy-button:focus-visible,
+  .code-copy-button[data-copied] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (hover: none) {
+    .code-copy-button {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
   /* 行内代码：去掉 typography 默认包在两侧的反引号，改为背景 + 圆角 */
   .prose-custom
     :where(code):not(
