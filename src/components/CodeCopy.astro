@@ -1,0 +1,78 @@
+<script>
+  const copyLabel = "复制";
+  const copiedLabel = "已复制";
+  const failedLabel = "复制失败";
+
+  async function copy(text: string): Promise<boolean> {
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // Clipboard API 不可用时走下面的降级方案
+      }
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.top = "0";
+    textarea.style.left = "0";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, textarea.value.length);
+
+    let copied = false;
+    try {
+      copied = document.execCommand("copy");
+    } catch {
+      copied = false;
+    } finally {
+      textarea.remove();
+    }
+
+    return copied;
+  }
+
+  function init() {
+    for (const pre of document.querySelectorAll<HTMLElement>(
+      ".prose-custom pre",
+    )) {
+      if (pre.parentElement?.classList.contains("code-block-wrapper")) continue;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block-wrapper";
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "code-copy-button";
+      button.textContent = copyLabel;
+      button.setAttribute("aria-label", "复制代码");
+      wrapper.appendChild(button);
+
+      button.addEventListener("click", async () => {
+        const code = pre.querySelector("code");
+        const text = (code ?? pre).textContent?.replace(/\n$/, "") ?? "";
+        const copied = await copy(text);
+
+        button.textContent = copied ? copiedLabel : failedLabel;
+        if (copied) button.dataset.copied = "true";
+
+        window.setTimeout(() => {
+          button.textContent = copyLabel;
+          delete button.dataset.copied;
+        }, 2000);
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
+</script>
