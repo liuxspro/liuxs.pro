@@ -9,7 +9,7 @@ import icon from "../assets/icon.png";
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href={icon.src} />
     <meta name="generator" content={Astro.generator} />
     <title>Liuxspro</title>
@@ -19,7 +19,7 @@ import icon from "../assets/icon.png";
       <header>
         <Nav />
       </header>
-      <main class="flex grow flex-col items-stretch">
+      <main class="flex grow flex-col items-stretch min-w-0">
         <slot />
       </main>
       <Footer />
@@ -37,6 +37,7 @@ import icon from "../assets/icon.png";
   #container {
     height: 100%;
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto 1fr auto;
   }
 </style>

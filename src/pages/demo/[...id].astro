@@ -20,7 +20,7 @@ const { Content } = await render(post);
 ---
 
 <Layout>
-  <article class="mx-auto max-w-3xl px-8 py-8 sm:px-4">
+  <article class="mx-auto w-full min-w-0 max-w-3xl px-6 py-8 sm:px-8">
     <h1 class="mb-6 text-3xl font-bold">{post.data.title}</h1>
     <Prose>
       <Content />
