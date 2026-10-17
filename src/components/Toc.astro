@@ -1,0 +1,90 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+  title?: string;
+  sticky?: boolean;
+}
+
+const { headings, title = "目录", sticky = true } = Astro.props;
+const items = headings.filter(
+  (heading) => heading.depth >= 2 && heading.depth <= 3,
+);
+---
+
+{items.length > 0 && (
+  <nav aria-label={title} class:list={["text-sm", sticky && "sticky top-8"]}>
+    <p class="mb-3 font-semibold text-gray-900 dark:text-gray-100">{title}</p>
+    <ul class="border-l border-gray-200 dark:border-gray-700">
+      {items.map((heading) => (
+        <li>
+          <a
+            href={`#${heading.slug}`}
+            data-toc-link
+            data-toc-id={heading.slug}
+            class:list={[
+              "toc-link -ml-px block border-l-2 border-transparent py-1.5 text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400",
+              heading.depth === 3 ? "pl-6" : "pl-3",
+            ]}
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<script>
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]"),
+  );
+  const headingIds = [
+    ...new Set(links.map((link) => link.dataset.tocId)),
+  ].filter((id): id is string => Boolean(id));
+  const headings = headingIds
+    .map((id) => document.getElementById(id))
+    .filter((heading): heading is HTMLElement => heading !== null);
+
+  if (headings.length > 0) {
+    const setActive = (id: string) => {
+      for (const link of links) {
+        if (link.dataset.tocId === id) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      }
+    };
+
+    const update = () => {
+      let current = headings[0]?.id;
+      const threshold = window.scrollY + 96;
+
+      for (const heading of headings) {
+        const top = heading.getBoundingClientRect().top + window.scrollY;
+        if (top <= threshold) current = heading.id;
+        else break;
+      }
+
+      if (current) setActive(current);
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  }
+</script>
+
+<style>
+  @reference "../styles/global.css";
+
+  .toc-link[aria-current="location"] {
+    @apply border-blue-600 font-medium text-blue-600 dark:border-blue-400 dark:text-blue-400;
+  }
+</style>
