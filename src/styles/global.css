@@ -30,4 +30,40 @@
     @apply bg-gray-100 dark:bg-gray-800/60;
     color: inherit;
   }
+
+  /* 行内代码：去掉 typography 默认包在两侧的反引号，改为背景 + 圆角 */
+  .prose-custom
+    :where(code):not(
+      :where(pre code, [class~="not-prose"], [class~="not-prose"] *)
+    )::before,
+  .prose-custom
+    :where(code):not(
+      :where(pre code, [class~="not-prose"], [class~="not-prose"] *)
+    )::after {
+    content: none;
+  }
+
+  .prose-custom
+    :where(code):not(
+      :where(pre code, [class~="not-prose"], [class~="not-prose"] *)
+    ) {
+    @apply rounded bg-gray-200 p-1  dark:bg-gray-800/60;
+  }
+
+  /* Tailwind Preflight 把 svg 设为 display: block，会让 MathJax 的
+     mjx-container[display="true"] { text-align: center } 失效，
+     块级公式因此靠左。恢复 svg 的行内显示即可居中。 */
+  .prose-custom mjx-container svg {
+    display: inline;
+  }
+  /*
+    去掉footnotes中的超链接的下划线
+  */
+  .prose-custom .footnotes a {
+    @apply no-underline;
+  }
+
+  .prose-custom p sup {
+    @apply mr-1;
+  }
 }

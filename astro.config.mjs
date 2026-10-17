@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import { satteri } from "@astrojs/markdown-satteri";
+import { satteriMathjax } from "satteri-mathjax";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -12,7 +13,10 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   markdown: {
-    processor: satteri({ features: { math: true } }),
+    processor: satteri({
+      features: { math: true, rawHtml: true },
+      mdastPlugins: [satteriMathjax()],
+    }),
     shikiConfig: {
       theme: "snazzy-light",
     },
