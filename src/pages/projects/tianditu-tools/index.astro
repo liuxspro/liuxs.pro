@@ -1,0 +1,213 @@
+---
+import {
+  Globe,
+  KeyRound,
+  Layers,
+  RotateCcwClock,
+  Search,
+  SlidersHorizontal,
+} from "@lucide/astro";
+import Layout from "@layouts/Layout.astro";
+import pluginIcon from "@assets/projects/tianditu-icon.png";
+import mapPreview from "@assets/projects/tianditu-map.webp";
+
+const links = {
+  qgis: "https://plugins.qgis.org/plugins/tianditu-tools/",
+  github: "https://github.com/liuxspro/qgis-plugin-tianditu",
+  issues: "https://github.com/liuxspro/qgis-plugin-tianditu/issues",
+  key: "https://cloudcenter.tianditu.gov.cn/center/development/myApp",
+};
+
+const features = [
+  {
+    title: "天地图底图",
+    desc: "矢量、影像、地形晕染、山体阴影与全球境界，另有矢量 / 影像 / 地形三组「含注记」图层组。",
+    icon: Layers,
+  },
+  {
+    title: "省级历史影像",
+    desc: "江苏、浙江、北京、上海、河北、河南、湖南、广东等省级节点的历史遥感影像。",
+    icon: RotateCcwClock,
+  },
+  {
+    title: "第三方地图",
+    desc: "Google、ESRI、高德、Stamen、OSM、OpenRailwayMap 等常用在线地图源。",
+    icon: Globe,
+  },
+  {
+    title: "天地图 Web 服务",
+    desc: "地名搜索、地理编码、逆地理编码三种模式，双击结果即可在地图上落点并缩放定位。",
+    icon: Search,
+  },
+  {
+    title: "多 Key 管理",
+    desc: "保存多个天地图 Key，验证通过才写入配置，可指定使用其中一个或随机轮换。",
+    icon: KeyRound,
+  },
+  {
+    title: "地图源管理",
+    desc: "在设置面板里勾选需要显示的地图源，「添加地图」菜单随配置即时刷新，菜单不再冗长。",
+    icon: SlidersHorizontal,
+  },
+];
+
+const badges = ["v0.6.0", "GPL-3.0", "QGIS 3.18 – 4.x", "Python 3"];
+---
+
+<Layout title="Tianditu Tools · QGIS 插件">
+  <div class="mx-auto w-full max-w-5xl px-6 py-10 sm:px-8 sm:py-12">
+    <!-- Hero -->
+    <section class="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
+      <div>
+        <div class="flex items-center gap-2.5">
+          <img
+            src={pluginIcon.src}
+            alt="TianDiTu Tools 插件图标"
+            width="40"
+            height="40"
+            class="h-10 w-10 rounded-lg"
+          />
+          <span class="text-xs font-semibold tracking-[0.18em] text-gray-500 uppercase">
+            QGIS Plugin Tianditu
+          </span>
+        </div>
+
+        <h1 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+          Tianditu Tools
+        </h1>
+
+        <p class="mt-3 max-w-prose text-sm leading-6 text-gray-600 sm:text-base">
+          在 QGIS
+          中一键加载天地图底图，并直接调用天地图的地名搜索、地理编码与逆地理编码服务。内置
+          Google、ESRI、高德等常用在线地图源。
+        </p>
+
+        <ul class="mt-4 flex flex-wrap gap-1.5">
+          {badges.map((badge) => (
+            <li class="rounded-full border border-gray-200 px-2.5 py-0.5 text-xs text-gray-600">
+              {badge}
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-6 flex flex-wrap items-center gap-2.5">
+          <a
+            href={links.qgis}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-amber-600"
+          >
+            在 QGIS 中获取
+          </a>
+          <a
+            href={links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-800 transition-colors hover:border-gray-400 hover:bg-gray-50"
+          >
+            查看源码
+          </a>
+        </div>
+
+        <p class="mt-3 text-xs text-gray-500">
+          使用前需要在
+          <a
+            href={links.key}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-amber-700 underline underline-offset-2 hover:text-amber-800"
+          >
+            天地图控制台
+          </a>
+          申请 Key（浏览器端或 Android 平台）。
+        </p>
+      </div>
+
+      <figure class="relative">
+        <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+          <img
+            src={mapPreview.src}
+            alt="天地图矢量底图在 QGIS 中的显示效果"
+            width="1563"
+            height="592"
+            class="aspect-video w-full object-cover"
+          />
+        </div>
+        <figcaption class="absolute bottom-2.5 left-2.5 rounded bg-white/85 px-2 py-0.5 text-xs font-medium text-gray-700 backdrop-blur">
+          天地图 · 矢量底图
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- 功能 -->
+    <section class="mt-12 sm:mt-14">
+      <p class="text-xs font-semibold tracking-[0.18em] text-amber-700 uppercase">
+        Features
+      </p>
+      <h2 class="mt-1 text-xl font-bold">功能</h2>
+
+      <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((feature) => {
+          const Icon = feature.icon;
+          return (
+            <li class="flex gap-3 rounded-lg border border-gray-200 p-4 transition-colors hover:border-amber-300 hover:bg-amber-50/40">
+              <Icon
+                class="mt-0.5 h-4 w-4 shrink-0 text-amber-700"
+                stroke-width={1.8}
+                aria-hidden="true"
+              />
+              <div class="min-w-0">
+                <h3 class="text-base font-semibold">{feature.title}</h3>
+                <p class="mt-1 text-sm leading-5 text-gray-600">
+                  {feature.desc}
+                </p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+
+    <!-- 页脚链接 -->
+    <section class="mt-12 border-t border-gray-200 pt-6 sm:mt-14">
+      <div class="flex flex-wrap gap-x-6 gap-y-1.5 text-sm">
+        <a
+          href={links.qgis}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-700 hover:text-amber-700 hover:underline"
+        >
+          QGIS 插件页面
+        </a>
+        <a
+          href={links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-700 hover:text-amber-700 hover:underline"
+        >
+          GitHub
+        </a>
+        <a
+          href={links.issues}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-700 hover:text-amber-700 hover:underline"
+        >
+          问题反馈
+        </a>
+        <a
+          href={`${links.github}/blob/main/LICENSE`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-700 hover:text-amber-700 hover:underline"
+        >
+          GPL-3.0 许可证
+        </a>
+      </div>
+
+      <p class="mt-4 max-w-3xl text-xs leading-relaxed text-gray-500">
+        插件内置的第三方地图源均来自其官方公开的瓦片地址，仅供学习与研究参考。请遵守各地图服务商的使用条款及相关法律法规。
+      </p>
+    </section>
+  </div>
+</Layout>
