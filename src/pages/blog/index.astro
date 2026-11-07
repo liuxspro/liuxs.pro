@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Background from "@components/Background.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Layout title="Blog · Liuxspro">
+  <Background />
+  <div class="mx-auto w-full max-w-3xl px-6 py-10 sm:px-8 sm:py-12">
+    <header class="flex-col flex-wrap items-baseline gap-x-3 gap-y-1">
+      <h1 class="text-2xl font-semibold tracking-[0.18em] text-amber-700 uppercase dark:text-amber-500">
+        Blog
+      </h1>
+      <p class="text-base text-gray-500 dark:text-gray-400">写点笔记。</p>
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="mt-8 text-gray-500">暂无文章。</p>
+    ) : (
+      <ul class="mt-8 divide-y divide-gray-200 dark:divide-gray-700">
+        {posts.map((post) => (
+          <li>
+            <a
+              href={`/blog/${post.id}`}
+              class="group flex items-baseline gap-3 py-3.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
+            >
+              <h2 class="min-w-0 text-base font-medium group-hover:text-amber-600">
+                {post.data.title}
+              </h2>
+              <span
+                class="mb-[0.4em] min-w-4 flex-1 border-b-2 border-dotted border-gray-500 dark:border-gray-600"
+                aria-hidden="true"
+              ></span>
+              <time
+                class="shrink-0 text-sm text-gray-500 tabular-nums font-mono"
+                datetime={post.data.date.toISOString()}
+              >
+                {post.data.date.toLocaleDateString("zh-CN")}
+              </time>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</Layout>
