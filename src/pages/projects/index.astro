@@ -1,0 +1,70 @@
+---
+import { ArrowUpRight } from "@lucide/astro";
+import Layout from "@layouts/Layout.astro";
+import Background from "@components/Background.astro";
+import tiandituIcon from "@assets/projects/tianditu-icon.png";
+
+const projects = [
+  {
+    name: "Tianditu Tools",
+    desc: "在 QGIS 中一键加载天地图底图，并直接调用天地图的地名搜索、地理编码与逆地理编码服务。",
+    href: "/projects/tianditu-tools",
+    icon: tiandituIcon,
+    tags: ["QGIS", "GPL-3.0", "Python 3"],
+  },
+];
+---
+
+<Layout title="Projects · Liuxspro">
+  <Background />
+
+  <div class="mx-auto w-full max-w-5xl px-6 py-10 sm:px-8 sm:py-12">
+    <header class="flex-col flex-wrap items-baseline gap-x-3 gap-y-1">
+      <h1 class="text-2xl font-semibold tracking-[0.18em] text-amber-700 uppercase dark:text-amber-500">
+        Projects
+      </h1>
+      <p class="text-base text-gray-500 dark:text-gray-400">
+        一些自己写的小工具和实验。
+      </p>
+    </header>
+
+    <ul class="mt-8 space-y-3">
+      {projects.map((project) => (
+        <li>
+          <a
+            href={project.href}
+            class="group flex items-start gap-4 rounded-xl border border-gray-200 bg-white/45 p-5 backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:border-gray-300 hover:bg-white/85 hover:shadow-md hover:shadow-gray-900/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400 dark:border-gray-700 dark:bg-white/5 dark:hover:border-gray-600 dark:hover:bg-white/10 dark:hover:shadow-black/20"
+          >
+            <img
+              src={project.icon.src}
+              alt=""
+              width="48"
+              height="48"
+              class="h-12 w-12 shrink-0 rounded-lg border border-gray-200/80 bg-white object-contain dark:border-gray-700"
+            />
+
+            <div class="min-w-0 flex-1">
+              <h2 class="text-base font-semibold">{project.name}</h2>
+              <p class="mt-1 line-clamp-2 text-sm leading-5 text-gray-600 dark:text-gray-400">
+                {project.desc}
+              </p>
+              <ul class="mt-2.5 flex flex-wrap gap-1.5">
+                {project.tags.map((tag) => (
+                  <li class="rounded-full border border-gray-200 px-2 py-0.5 text-xs text-gray-600 dark:border-gray-700 dark:text-gray-400">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <ArrowUpRight
+              class="mt-0.5 h-4 w-4 shrink-0 text-gray-400 transition duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gray-800 dark:group-hover:text-gray-200"
+              stroke-width={1.8}
+              aria-hidden="true"
+            />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
