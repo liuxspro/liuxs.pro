@@ -2,21 +2,32 @@
 import icon from "../assets/icon.png";
 ---
 
-<nav
-  class="flex items-center justify-between px-4 lg:px-8 py-5 shadow-sm shadow-base-300 bg-base-100 text-base-content"
->
+<nav class="flex items-center justify-between px-4 lg:px-8 py-5 shadow-sm shadow-base-300 bg-base-100 text-base-content">
   <div class="font-semibold mx-4">
     <div class="avatar flex items-center space-x-2">
       <div class="w-6">
         <img class="rounded" src={icon.src} />
       </div>
-      <a href="/">Liuxs' Blog</a>
+      <a href="/">Liuxspro</a>
     </div>
   </div>
   <div id="menu" class="flex lg:pr-16 items-center">
-    <ul class="flex items-center space-x-4 mx-4">
+    <ul class="mx-4 flex items-center gap-5 font-mono font-semibold">
       <li>
-        <a href="/blog">Posts</a>
+        <a
+          href="/blog"
+          class="text-amber-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+        >
+          Blog
+        </a>
+      </li>
+      <li>
+        <a
+          href="/projects"
+          class="text-amber-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+        >
+          Projects
+        </a>
       </li>
     </ul>
   </div>
